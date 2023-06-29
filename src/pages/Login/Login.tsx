@@ -1,4 +1,13 @@
+import { signUp } from "../../services/cognito";
+
 const Login = () => {
+  const handleSignInWithGoogle = async () => {
+    // Code to handle sign-in with Google
+    // You can use the `pirulo` function or implement the sign-in logic here
+    // Example:
+    await signUp("brian@hola.com", "1235465546");
+  };
+
   return (
     <>
       <div className="flex min-h-full flex-col justify-center px-6 py-12 lg:px-8">
@@ -42,14 +51,6 @@ const Login = () => {
                 >
                   Password
                 </label>
-                <div className="text-sm">
-                  <a
-                    href="#"
-                    className="font-semibold text-orange-600 hover:text-orange-500"
-                  >
-                    Forgot password?
-                  </a>
-                </div>
               </div>
               <div className="mt-2">
                 <input
@@ -61,6 +62,14 @@ const Login = () => {
                   className="block w-full rounded-md border-0 py-1.5 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-orange-600 sm:text-sm sm:leading-6"
                 />
               </div>
+              <div className="flex text-sm mt-1 justify-end">
+                <a
+                  href="#"
+                  className="font-semibold text-orange-600 hover:text-orange-500 "
+                >
+                  Forgot password?
+                </a>
+              </div>
             </div>
 
             <div>
@@ -68,18 +77,19 @@ const Login = () => {
                 type="submit"
                 className="flex w-full text-white bg-orange-600 hover:bg-orange-500 rounded-md justify-center font-semibold px-3 py-1.5 text-sm leading-6 shadow-md"
               >
-                Sign in
+                <div>Sign in</div>
               </button>
             </div>
           </form>
           <div className="inline-flex items-center justify-center w-full">
             <hr className="w-64 h-px my-8 bg-gray-200 border-0" />
-            <span className="absolute px-3 font-medium text-gray-900 -translate-x-1/2 bg-white left-1/2 ">
+            <span className="absolute px-3 font-medium text-gray-500 -translate-x-1/2 bg-white left-1/2 ">
               or
             </span>
           </div>
           <div className="px-6 sm:px-0 max-w-sm">
             <button
+              onClick={handleSignInWithGoogle}
               type="button"
               className="flex w-full text-white bg-[#4285F4] hover:bg-[#4285F4]/90 rounded-md justify-between items-center font-semibold px-3 py-1.5 text-sm leading-6 shadow-md"
             >
@@ -101,8 +111,8 @@ const Login = () => {
               Sign in with Google<div></div>
             </button>
           </div>
-          <p className="mt-10 text-center text-sm text-gray-500">
-            Not a member?
+          <p className="flex mt-10 justify-center items-center text-sm text-gray-500">
+            <div> Not a member?</div>
             <a
               href="#"
               className="font-semibold leading-6 text-orange-600 hover:text-orange-500"
