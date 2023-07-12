@@ -1,13 +1,9 @@
-import { signUp, signIn } from "../../services/cognito";
+import { signIn } from "../../services/cognito";
 
 const Login = () => {
-  // const handleSignInWithGoogle = async () => {
-  //   await signUp("brian@hola.com", "1235465546");
-  // };
-
   const handleLogin = async (e: any) => {
     e.preventDefault();
-    await signIn("brian@towers.com", "12345678");
+    await signIn("brianfiuba@gmail.com", "12345678");
   };
 
   return (
@@ -25,7 +21,11 @@ const Login = () => {
         </div>
 
         <div className="mt-10 sm:mx-auto sm:w-full sm:max-w-sm">
-          <form className="space-y-6" action="#" onSubmit={handleLogin}>
+          <form
+            className="space-y-6"
+            action="#"
+            onSubmit={(e) => handleLogin(e)}
+          >
             <div>
               <label
                 htmlFor="email"
@@ -113,15 +113,15 @@ const Login = () => {
               Sign in with Google<div></div>
             </button>
           </div>
-          <p className="flex mt-10 justify-center items-center text-sm text-gray-500">
-            <div> Not a member?</div>
+          <div className="flex mt-10 justify-center items-center text-sm text-gray-500">
+            <p> Not a member?</p>
             <a
               href="#"
               className="font-semibold leading-6 text-orange-600 hover:text-orange-500"
             >
               Register
             </a>
-          </p>
+          </div>
         </div>
       </div>
     </>

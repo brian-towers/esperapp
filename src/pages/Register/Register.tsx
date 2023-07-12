@@ -1,4 +1,11 @@
+import { signUp } from "../../services/cognito";
+
 const Register = () => {
+  const SignUp = async (e: any) => {
+    e.preventDefault();
+    await signUp("brianfiuba@gmail.com", "12345678");
+  };
+
   return (
     <>
       <div className="flex min-h-full flex-col justify-center px-6 py-12 lg:px-8">
@@ -14,7 +21,7 @@ const Register = () => {
         </div>
 
         <div className="mt-10 sm:mx-auto sm:w-full sm:max-w-sm">
-          <form className="space-y-6" action="#" method="POST">
+          <form className="space-y-6" action="#" onSubmit={(e) => SignUp(e)}>
             <div>
               <label
                 htmlFor="first_name"
