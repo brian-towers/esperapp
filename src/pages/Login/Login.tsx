@@ -1,11 +1,13 @@
-import { signUp } from "../../services/cognito";
+import { signUp, signIn } from "../../services/cognito";
 
 const Login = () => {
-  const handleSignInWithGoogle = async () => {
-    // Code to handle sign-in with Google
-    // You can use the `pirulo` function or implement the sign-in logic here
-    // Example:
-    await signUp("brian@hola.com", "1235465546");
+  // const handleSignInWithGoogle = async () => {
+  //   await signUp("brian@hola.com", "1235465546");
+  // };
+
+  const handleLogin = async (e: any) => {
+    e.preventDefault();
+    await signIn("brian@towers.com", "12345678");
   };
 
   return (
@@ -23,7 +25,7 @@ const Login = () => {
         </div>
 
         <div className="mt-10 sm:mx-auto sm:w-full sm:max-w-sm">
-          <form className="space-y-6" action="#" method="POST">
+          <form className="space-y-6" action="#" onSubmit={handleLogin}>
             <div>
               <label
                 htmlFor="email"
@@ -38,7 +40,7 @@ const Login = () => {
                   type="email"
                   autoComplete="email"
                   required
-                  className="block w-full rounded-md border-0 py-1.5 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-orange-600 sm:text-sm sm:leading-6"
+                  className="block w-full rounded-md border-0 py-1.5 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400  focus:ring-orange-600 sm:text-sm sm:leading-6"
                 />
               </div>
             </div>
@@ -89,7 +91,7 @@ const Login = () => {
           </div>
           <div className="px-6 sm:px-0 max-w-sm">
             <button
-              onClick={handleSignInWithGoogle}
+              onClick={(e) => handleLogin(e)}
               type="button"
               className="flex w-full text-white bg-[#4285F4] hover:bg-[#4285F4]/90 rounded-md justify-between items-center font-semibold px-3 py-1.5 text-sm leading-6 shadow-md"
             >
