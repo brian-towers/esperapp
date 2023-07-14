@@ -34,21 +34,21 @@ export function signUp(email: string, password: string) {
 }
 
 export function signIn(email: string, password: string) {
-  var authenticationData = {
+  const authenticationData = {
     Username: email,
     Password: password,
   };
-  var authenticationDetails = new AuthenticationDetails(authenticationData);
+  const authenticationDetails = new AuthenticationDetails(authenticationData);
 
-  var userPool = new CognitoUserPool(poolData);
-  var userData = {
+  const userPool = new CognitoUserPool(poolData);
+  const userData = {
     Username: email,
     Pool: userPool,
   };
-  var cognitoUser = new CognitoUser(userData);
+  const cognitoUser = new CognitoUser(userData);
   cognitoUser.authenticateUser(authenticationDetails, {
     onSuccess: function (result) {
-      var accessToken = result.getAccessToken().getJwtToken();
+      const accessToken = result.getAccessToken().getJwtToken();
       console.log(accessToken);
       // //POTENTIAL: Region needs to be set if not already set previously elsewhere.
       // AWS.config.region = "<region>";
@@ -82,11 +82,11 @@ export function signIn(email: string, password: string) {
 }
 
 export function confirmRegistration(email: string, code: string) {
-  var userData = {
+  const userData = {
     Username: email,
     Pool: userPool,
   };
-  var cognitoUser = new CognitoUser(userData);
+  const cognitoUser = new CognitoUser(userData);
   cognitoUser.confirmRegistration(code, true, function (err, result) {
     if (err) {
       alert(err.message || JSON.stringify(err));
