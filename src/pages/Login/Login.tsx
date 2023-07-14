@@ -1,9 +1,13 @@
+import { useState } from "react";
 import { signIn } from "../../services/cognito";
 
 const Login = () => {
+  const [email, setEmail] = useState();
+  const [password, setPassword] = useState();
+
   const handleLogin = async (e: any) => {
     e.preventDefault();
-    await signIn("brianfiuba@gmail.com", "12345678");
+    await signIn(email, password);
   };
 
   return (
@@ -16,7 +20,7 @@ const Login = () => {
             alt="EsperaApp"
           />
           <h2 className="mt-4 text-center text-2xl font-bold leading-9 tracking-tight text-gray-900">
-            Sign in to your account
+            Ingrese a su cuenta
           </h2>
         </div>
 
@@ -40,7 +44,7 @@ const Login = () => {
                   type="email"
                   autoComplete="email"
                   required
-                  className="block w-full rounded-md border-0 py-1.5 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400  focus:ring-orange-600 sm:text-sm sm:leading-6"
+                  className="block w-full rounded-md border-0 py-1.5 px-2 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400  focus:ring-orange-600 sm:text-sm sm:leading-6"
                 />
               </div>
             </div>
@@ -51,7 +55,7 @@ const Login = () => {
                   htmlFor="password"
                   className="block text-sm font-medium leading-6 text-gray-900"
                 >
-                  Password
+                  Contraseña
                 </label>
               </div>
               <div className="mt-2">
@@ -61,7 +65,7 @@ const Login = () => {
                   type="password"
                   autoComplete="current-password"
                   required
-                  className="block w-full rounded-md border-0 py-1.5 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-orange-600 sm:text-sm sm:leading-6"
+                  className="block w-full rounded-md border-0 py-1.5 px-2 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400  focus:ring-orange-600 sm:text-sm sm:leading-6"
                 />
               </div>
               <div className="flex text-sm mt-1 justify-end">
@@ -69,7 +73,7 @@ const Login = () => {
                   href="#"
                   className="font-semibold text-orange-600 hover:text-orange-500 "
                 >
-                  Forgot password?
+                  ¿Olvidó su contraseña?
                 </a>
               </div>
             </div>
@@ -79,14 +83,14 @@ const Login = () => {
                 type="submit"
                 className="flex w-full text-white bg-orange-600 hover:bg-orange-500 rounded-md justify-center font-semibold px-3 py-1.5 text-sm leading-6 shadow-md"
               >
-                <div>Sign in</div>
+                <div>Ingresar</div>
               </button>
             </div>
           </form>
           <div className="inline-flex items-center justify-center w-full">
             <hr className="w-64 h-px my-8 bg-gray-200 border-0" />
             <span className="absolute px-3 font-medium text-gray-500 -translate-x-1/2 bg-white left-1/2 ">
-              or
+              o
             </span>
           </div>
           <div className="px-6 sm:px-0 max-w-sm">
@@ -110,17 +114,19 @@ const Login = () => {
                   d="M488 261.8C488 403.3 391.1 504 248 504 110.8 504 0 393.2 0 256S110.8 8 248 8c66.8 0 123 24.5 166.3 64.9l-67.5 64.9C258.5 52.6 94.3 116.6 94.3 256c0 86.5 69.1 156.6 153.7 156.6 98.2 0 135-70.4 140.8-106.9H248v-85.3h236.1c2.3 12.7 3.9 24.9 3.9 41.4z"
                 ></path>
               </svg>
-              Sign in with Google<div></div>
+              Ingresar con Google<div></div>
             </button>
           </div>
           <div className="flex mt-10 justify-center items-center text-sm text-gray-500">
-            <p> Not a member?</p>
-            <a
-              href="#"
-              className="font-semibold leading-6 text-orange-600 hover:text-orange-500"
-            >
-              Register
-            </a>
+            <p>
+              ¿No tiene una cuenta?{" "}
+              <a
+                href="/register"
+                className="font-semibold leading-6 text-orange-600 hover:text-orange-500"
+              >
+                Registrarse
+              </a>
+            </p>
           </div>
         </div>
       </div>

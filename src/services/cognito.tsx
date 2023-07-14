@@ -35,7 +35,7 @@ export function signUp(email: string, password: string) {
 export function signIn(email: string, password: string) {
   var authenticationData = {
     Username: email,
-    Password: password,
+    Contraseña: password,
   };
   var authenticationDetails = new AuthenticationDetails(authenticationData);
 

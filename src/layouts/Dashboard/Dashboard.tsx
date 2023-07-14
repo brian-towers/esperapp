@@ -1,11 +1,16 @@
-import { Navbar } from "../../components/Navbar";
+import Navbar from "../../components/Navbar";
 import Sidebar from "../../components/Sidebar";
 
-const Dashboard = () => {
+const Dashboard = ({ children }: { children: any }) => {
   return (
     <>
-      <Navbar />
-      <Sidebar />
+      <div className="flex flex-col">
+        <Navbar />
+        <div className="flex">
+          <Sidebar />
+          <div className="p-6">{children}</div>
+        </div>
+      </div>
     </>
   );
 };
