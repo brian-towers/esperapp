@@ -26,6 +26,7 @@ export function signUp(email: string, password: string) {
         return;
       }
       const User = result?.user;
+      alert(JSON.stringify(User));
       resolve(User);
       return;
     });
@@ -35,7 +36,7 @@ export function signUp(email: string, password: string) {
 export function signIn(email: string, password: string) {
   var authenticationData = {
     Username: email,
-    Contraseña: password,
+    Password: password,
   };
   var authenticationDetails = new AuthenticationDetails(authenticationData);
 

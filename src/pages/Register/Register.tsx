@@ -1,9 +1,13 @@
+import { useState } from "react";
 import { signUp } from "../../services/cognito";
 
 const Register = () => {
+  const [email, setEmail] = useState("");
+  const [password, setPassword] = useState("");
+
   const SignUp = async (e: any) => {
     e.preventDefault();
-    await signUp("brianfiuba@gmail.com", "12345678");
+    await signUp(email, password);
   };
 
   return (
@@ -16,18 +20,18 @@ const Register = () => {
             alt="EsperaApp"
           />
           <h2 className="mt-4 text-center text-2xl font-bold leading-9 tracking-tight text-gray-900">
-            Register New Account
+            Crear Cuenta
           </h2>
         </div>
 
         <div className="mt-10 sm:mx-auto sm:w-full sm:max-w-sm">
-          <form className="space-y-6" action="#" onSubmit={(e) => SignUp(e)}>
+          <form className="space-y-6" action="#" onSubmit={SignUp}>
             <div>
               <label
                 htmlFor="first_name"
                 className="block text-sm font-medium leading-6 text-gray-900"
               >
-                First Name
+                Nombre
               </label>
               <div className="mt-2">
                 <input
@@ -45,7 +49,7 @@ const Register = () => {
                 htmlFor="last_name"
                 className="block text-sm font-medium leading-6 text-gray-900"
               >
-                Last Name
+                Apellido
               </label>
               <div className="mt-2">
                 <input
@@ -67,6 +71,10 @@ const Register = () => {
               </label>
               <div className="mt-2">
                 <input
+                  value={email}
+                  onChange={(e) => {
+                    setEmail(e.target.value);
+                  }}
                   id="email"
                   name="email"
                   type="email"
@@ -88,6 +96,10 @@ const Register = () => {
               </div>
               <div className="mt-2">
                 <input
+                  value={password}
+                  onChange={(e) => {
+                    setPassword(e.target.value);
+                  }}
                   id="password"
                   name="password"
                   type="password"
@@ -103,7 +115,7 @@ const Register = () => {
                   htmlFor="password"
                   className="block text-sm font-medium leading-6 text-gray-900"
                 >
-                  Repeat Contraseña
+                  Repetir Contraseña
                 </label>
               </div>
               <div className="mt-2">
@@ -123,18 +135,19 @@ const Register = () => {
                 type="submit"
                 className="flex w-full justify-center rounded-md bg-orange-600 px-3 py-1.5 text-sm font-semibold leading-6 text-white shadow-sm hover:bg-orange-500 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-orange-600"
               >
-                Register
+                Crear cuenta
               </button>
             </div>
           </form>
 
           <p className="mt-10 text-center text-sm text-gray-500">
-            Already have an account?
+            ¿Ya tiene una cuenta?
             <a
               href="/login"
               className="font-semibold leading-6 text-orange-600 hover:text-orange-500"
             >
-              Login
+              {" "}
+              Ingresar
             </a>
           </p>
         </div>

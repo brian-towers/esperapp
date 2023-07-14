@@ -2,8 +2,8 @@ import { useState } from "react";
 import { signIn } from "../../services/cognito";
 
 const Login = () => {
-  const [email, setEmail] = useState();
-  const [password, setPassword] = useState();
+  const [email, setEmail] = useState("");
+  const [password, setPassword] = useState("");
 
   const handleLogin = async (e: any) => {
     e.preventDefault();
@@ -25,11 +25,7 @@ const Login = () => {
         </div>
 
         <div className="mt-10 sm:mx-auto sm:w-full sm:max-w-sm">
-          <form
-            className="space-y-6"
-            action="#"
-            onSubmit={(e) => handleLogin(e)}
-          >
+          <form className="space-y-6" action="#" onSubmit={handleLogin}>
             <div>
               <label
                 htmlFor="email"
@@ -39,6 +35,10 @@ const Login = () => {
               </label>
               <div className="mt-2">
                 <input
+                  value={email}
+                  onChange={(e) => {
+                    setEmail(e.target.value);
+                  }}
                   id="email"
                   name="email"
                   type="email"
@@ -60,6 +60,9 @@ const Login = () => {
               </div>
               <div className="mt-2">
                 <input
+                  onChange={(e) => {
+                    setPassword(e.target.value);
+                  }}
                   id="password"
                   name="password"
                   type="password"
