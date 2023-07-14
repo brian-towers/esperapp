@@ -7,7 +7,11 @@ const Login = () => {
 
   const handleLogin = async (e: any) => {
     e.preventDefault();
-    await signIn(email, password);
+    try {
+      signIn(email, password);
+    } catch (e) {
+      console.log(e);
+    }
   };
 
   return (

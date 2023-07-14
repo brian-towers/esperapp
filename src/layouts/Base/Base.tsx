@@ -1,4 +1,6 @@
-const Base = ({ children }: { children: any }) => {
+import { ReactNode } from "react";
+
+const Base = ({ children }: { children: ReactNode }) => {
   return <>{children}</>;
 };
 
