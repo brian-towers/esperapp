@@ -1,4 +1,4 @@
-import { confirmRegistration } from "../../services/cognito";
+import { confirmRegistration } from "../../services2/cognito";
 
 const ConfirmCode = () => {
   const handleSubmit = async (e: any) => {

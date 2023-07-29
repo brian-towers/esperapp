@@ -1,5 +1,5 @@
 import { useState } from "react";
-import { signUp } from "../../services/cognito";
+import { signUp } from "../../services2/cognito";
 
 const Register = () => {
   const [email, setEmail] = useState("");
