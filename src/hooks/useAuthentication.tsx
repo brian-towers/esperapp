@@ -6,8 +6,8 @@ import { setAuthToken } from "@store/features/userSlice";
 
 const useAuthentication = () => {
   const dispatch = useAppDispatch();
-  const [authLoading, setAuthLoading] = useState(false);
-  const [authError, setAuthError] = useState(null);
+  const [authLoading, setAuthLoading] = useState<boolean>(false);
+  const [authError, setAuthError] = useState<string | null>(null);
 
   const login = async (credentials: {
     username: string;
@@ -19,8 +19,8 @@ const useAuthentication = () => {
       dispatch(setAuthToken(token));
       setAuthLoading(false);
       return true;
-    } catch (error) {
-      setAuthError(error.message);
+    } catch (error: any) {
+      setAuthError(error.message as string);
       setAuthLoading(false);
       return false;
     }
