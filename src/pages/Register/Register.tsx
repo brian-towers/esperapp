@@ -1,5 +1,5 @@
 import { useState } from "react";
-import { signUp } from "../../services2/cognito";
+import auth from "../../services/authentication";
 
 const Register = () => {
   const [email, setEmail] = useState("");
@@ -7,7 +7,7 @@ const Register = () => {
 
   const SignUp = async (e: any) => {
     e.preventDefault();
-    await signUp(email, password);
+    await auth.register({ email, password });
   };
 
   return (

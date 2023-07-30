@@ -1,14 +1,23 @@
-import { useState } from "react";
-import { signIn } from "../../services2/cognito";
+import { useEffect, useState } from "react";
+import auth from "@services/authentication";
+import { useAppDispatch } from "@hooks/useAppDispatch";
+import { useAppSelector } from "@hooks/useAppSelector";
+import { setAuthToken } from "@store/features/userSlice";
 
 const Login = () => {
+  const dispatch = useAppDispatch();
+  const tokens = useAppSelector((state) => state.user.authToken);
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
+
+  useEffect(() => {}, [tokens]);
 
   const handleLogin = async (e: any) => {
     e.preventDefault();
     try {
-      signIn(email, password);
+      const token = await auth.login({ username: email, password });
+      dispatch(setAuthToken(token));
+      console.log(token);
     } catch (e) {
       console.log(e);
     }
@@ -133,6 +142,7 @@ const Login = () => {
               >
                 Registrarse
               </a>
+              {tokens}
             </p>
           </div>
         </div>

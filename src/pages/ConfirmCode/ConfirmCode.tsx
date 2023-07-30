@@ -1,9 +1,9 @@
-import { confirmRegistration } from "../../services2/cognito";
+import auth from "../../services/authentication";
 
 const ConfirmCode = () => {
   const handleSubmit = async (e: any) => {
     e.preventDefault();
-    await confirmRegistration("brianfiuba@gmail.com", "12345678");
+    await auth.confirmRegistration();
   };
   return (
     <>

@@ -27,7 +27,7 @@ class Cognito {
       userData.password,
       [],
       [],
-      function (err: { message: string }, result: { user: any }) {
+      function (err: any, result: any) {
         if (err) {
           alert(err.message || JSON.stringify(err));
           return;
@@ -76,7 +76,7 @@ class Cognito {
   async login(credentials: {
     username: string;
     password: string;
-  }): Promise<any> {
+  }): Promise<string> {
     console.log(credentials.username, credentials.password);
     return new Promise((resolve, reject) => {
       const authenticationData = {
@@ -97,6 +97,7 @@ class Cognito {
         onSuccess: function (result) {
           const accessToken = result.getAccessToken().getJwtToken();
           resolve(accessToken);
+
           // POTENTIAL: Region needs to be set if not already set previously elsewhere.
           // AWS.config.region = "<region>"
 

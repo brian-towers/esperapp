@@ -1,7 +1,9 @@
 import { cognito } from "./cognito";
 
+const AUTH_SERVICE = "COGNITO"; // set to an env variable
+
 interface authentication {
-  login(credentials: { username: string; password: string }): Promise<any>;
+  login(credentials: { username: string; password: string }): Promise<string>;
   register(userData: { email: string; password: string }): Promise<void>;
   logout(): Promise<any>;
   resendConfirmationCode(): Promise<any>;
@@ -10,7 +12,7 @@ interface authentication {
 
 let auth: authentication;
 
-switch (process.env.AUTH_SERVICE) {
+switch (AUTH_SERVICE) {
   case "COGNITO":
     auth = cognito;
     break;
