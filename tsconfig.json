@@ -10,9 +10,12 @@
     "paths": {
       "@services/*": ["src/services/*"],
       "@store/*": ["src/store/*"],
-      "@hooks/*": ["src/hooks/*"]
-      // Add more path aliases if needed
+      "@hooks/*": ["src/hooks/*"],
+      "@components/*": ["src/components/*"],
+      "@routes/*": ["src/routes/*"]
     },
+
+    "allowSyntheticDefaultImports": true,
 
     /* Bundler mode */
     "moduleResolution": "bundler",

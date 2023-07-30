@@ -1,7 +1,5 @@
 import { useEffect, useState } from "react";
-import auth from "@services/authentication";
-import { useAppDispatch } from "@hooks/useAppDispatch";
-import { useAppSelector } from "@hooks/useAppSelector";
+import { useAppDispatch, useAppSelector } from "@hooks/index";
 import { setAuthToken } from "@store/features/userSlice";
 
 const Login = () => {
