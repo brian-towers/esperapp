@@ -16,7 +16,7 @@ export class Api {
   constructor(config: ApiConfig = DEFAULT_API_CONFIG) {
     this.config = config;
     this.apiService = axios.create({
-      baseURL: "https://www.google.com",
+      baseURL: this.config.url,
       timeout: this.config.timeout,
       headers: {
         Accept: "application/json",

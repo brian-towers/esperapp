@@ -1,22 +1,19 @@
-import { useEffect, useState } from "react";
+import Spinner from "@components/Spinner";
 import { useAuthentication } from "@hooks/index";
+import { useForm } from "react-hook-form";
 
 const Login = () => {
-  const { authLoading, authError, login } = useAuthentication();
-  const [email, setEmail] = useState("");
-  const [password, setPassword] = useState("");
+  const {
+    register,
+    handleSubmit,
+    watch,
+    formState: { errors },
+  } = useForm();
+  const { authLoading, authError, authLogin } = useAuthentication();
 
-  // useEffect(() => {
-  //   console.log("hello");
-  // }, [tokens]);
-
-  const handleLogin = async (e: any) => {
-    e.preventDefault();
-    try {
-      await login({ username: email, password });
-    } catch (e) {
-      console.log(e);
-    }
+  const submitForm = (data: any) => {
+    console.log(data);
+    authLogin(data);
   };
 
   return (
@@ -34,7 +31,11 @@ const Login = () => {
         </div>
 
         <div className="mt-10 sm:mx-auto sm:w-full sm:max-w-sm">
-          <form className="space-y-6" action="#" onSubmit={handleLogin}>
+          <form
+            className="space-y-6"
+            action="#"
+            onSubmit={handleSubmit(submitForm)}
+          >
             <div>
               <label
                 htmlFor="email"
@@ -44,16 +45,12 @@ const Login = () => {
               </label>
               <div className="mt-2">
                 <input
-                  value={email}
-                  onChange={(e) => {
-                    setEmail(e.target.value);
-                  }}
                   id="email"
-                  name="email"
                   type="email"
                   autoComplete="email"
                   required
                   className="block w-full rounded-md border-0 py-1.5 px-2 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400  focus:ring-orange-600 sm:text-sm sm:leading-6"
+                  {...register("username")}
                 />
               </div>
             </div>
@@ -69,15 +66,12 @@ const Login = () => {
               </div>
               <div className="mt-2">
                 <input
-                  onChange={(e) => {
-                    setPassword(e.target.value);
-                  }}
                   id="password"
-                  name="password"
                   type="password"
                   autoComplete="current-password"
                   required
                   className="block w-full rounded-md border-0 py-1.5 px-2 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400  focus:ring-orange-600 sm:text-sm sm:leading-6"
+                  {...register("password")}
                 />
               </div>
               <div className="flex text-sm mt-1 justify-end">
@@ -95,7 +89,7 @@ const Login = () => {
                 type="submit"
                 className="flex w-full text-white bg-orange-600 hover:bg-orange-500 rounded-md justify-center font-semibold px-3 py-1.5 text-sm leading-6 shadow-md"
               >
-                <div>Ingresar</div>
+                {authLoading ? <Spinner /> : "Ingresar"}
               </button>
             </div>
           </form>
@@ -107,8 +101,7 @@ const Login = () => {
           </div>
           <div className="px-6 sm:px-0 max-w-sm">
             <button
-              onClick={(e) => handleLogin(e)}
-              type="button"
+              type="submit"
               className="flex w-full text-white bg-[#4285F4] hover:bg-[#4285F4]/90 rounded-md justify-between items-center font-semibold px-3 py-1.5 text-sm leading-6 shadow-md"
             >
               <svg

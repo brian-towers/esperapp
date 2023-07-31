@@ -1,15 +1,21 @@
-// Custom hook: useAuthentication.js
 import { useState } from "react";
 import { useAppDispatch } from "@hooks/index";
 import { setAuthToken } from "@store/features/userSlice";
 import auth from "@services/authentication";
+
+interface userData {
+  firstName: string;
+  lastName: string;
+  email: string;
+  password: string;
+}
 
 const useAuthentication = () => {
   const dispatch = useAppDispatch();
   const [authLoading, setAuthLoading] = useState<boolean>(false);
   const [authError, setAuthError] = useState<string | null>(null);
 
-  const login = async (credentials: {
+  const authLogin = async (credentials: {
     username: string;
     password: string;
   }): Promise<boolean> => {
@@ -26,7 +32,7 @@ const useAuthentication = () => {
     }
   };
 
-  const logout = async () => {
+  const authLogout = async () => {
     try {
       setAuthLoading(true);
       await auth.logout();
@@ -37,7 +43,7 @@ const useAuthentication = () => {
     }
   };
 
-  const register = async (userData: { email: string; password: string }) => {
+  const authRegister = async (userData: userData) => {
     try {
       setAuthLoading(true);
       await auth.register(userData);
@@ -48,7 +54,7 @@ const useAuthentication = () => {
     }
   };
 
-  return { authLoading, authError, login, logout, register };
+  return { authLoading, authError, authLogin, authLogout, authRegister };
 };
 
 export default useAuthentication;

@@ -1,10 +1,12 @@
+import Spinner from "@components/Spinner";
 import useAuthentication from "@hooks/useAuthentication";
+import { useForm } from "react-hook-form";
 
 const Register = () => {
   const { register, handleSubmit } = useForm();
-  const { authLoading, authError, register } = useAuthentication();
+  const { authLoading, authError, authRegister } = useAuthentication();
 
-  const submitForm = async (userData: any) => await register(userData);
+  const submitForm = (data: any) => authRegister(data);
 
   return (
     <>
@@ -36,7 +38,6 @@ const Register = () => {
               <div className="mt-2">
                 <input
                   id="firstName"
-                  name="firstName"
                   type="text"
                   autoComplete="firstName"
                   required
@@ -55,7 +56,6 @@ const Register = () => {
               <div className="mt-2">
                 <input
                   id="lastName"
-                  name="lastName"
                   type="text"
                   autoComplete="lastName"
                   required
@@ -74,7 +74,6 @@ const Register = () => {
               <div className="mt-2">
                 <input
                   id="email"
-                  name="email"
                   type="email"
                   autoComplete="email"
                   required
@@ -96,7 +95,6 @@ const Register = () => {
               <div className="mt-2">
                 <input
                   id="password"
-                  name="password"
                   type="password"
                   autoComplete="current-password"
                   required
@@ -111,7 +109,7 @@ const Register = () => {
                 type="submit"
                 className="flex w-full justify-center rounded-md bg-orange-600 px-3 py-1.5 text-sm font-semibold leading-6 text-white shadow-sm hover:bg-orange-500 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-orange-600"
               >
-                Crear cuenta
+                {authLoading ? <Spinner /> : "Crear Cuenta"}
               </button>
             </div>
           </form>
