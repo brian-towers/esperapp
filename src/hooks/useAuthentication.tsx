@@ -37,7 +37,7 @@ const useAuthentication = () => {
     }
   };
 
-  const register = async (userData) => {
+  const register = async (userData: { email: string; password: string }) => {
     setAuthLoading(true);
     try {
       // Replace this with the actual register logic from auth or your authentication service

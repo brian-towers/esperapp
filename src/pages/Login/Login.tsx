@@ -1,20 +1,21 @@
 import { useEffect, useState } from "react";
-import { useAppDispatch, useAppSelector } from "@hooks/index";
-import { setAuthToken } from "@store/features/userSlice";
+import { useAppSelector, useAuthentication } from "@hooks/index";
 
 const Login = () => {
-  const dispatch = useAppDispatch();
+  const { authLoading, authError, login } = useAuthentication();
   const tokens = useAppSelector((state) => state.user.authToken);
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
 
-  useEffect(() => {}, [tokens]);
+  // useEffect(() => {
+  //   console.log("hello");
+  // }, [tokens]);
 
   const handleLogin = async (e: any) => {
     e.preventDefault();
     try {
-      const token = await auth.login({ username: email, password });
-      dispatch(setAuthToken(token));
+      const token = await login({ username: email, password });
+
       console.log(token);
     } catch (e) {
       console.log(e);

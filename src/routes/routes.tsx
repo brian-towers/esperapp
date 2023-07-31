@@ -1,8 +1,5 @@
-import Base from "../layouts/Base/Base";
-import Dashboard from "../layouts/Dashboard/Dashboard";
-import Home from "../pages/Home/Home";
-import Login from "../pages/Login/Login";
-import Register from "../pages/Register/Register";
+import { Base, Dashboard } from "@layouts/index";
+import { Home, Login, Register } from "@pages/index";
 
 const routes = [
   {
