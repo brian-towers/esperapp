@@ -1,9 +1,8 @@
 import { useEffect, useState } from "react";
-import { useAppSelector, useAuthentication } from "@hooks/index";
+import { useAuthentication } from "@hooks/index";
 
 const Login = () => {
   const { authLoading, authError, login } = useAuthentication();
-  const tokens = useAppSelector((state) => state.user.authToken);
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
 
@@ -14,9 +13,7 @@ const Login = () => {
   const handleLogin = async (e: any) => {
     e.preventDefault();
     try {
-      const token = await login({ username: email, password });
-
-      console.log(token);
+      await login({ username: email, password });
     } catch (e) {
       console.log(e);
     }
@@ -141,7 +138,6 @@ const Login = () => {
               >
                 Registrarse
               </a>
-              {tokens}
             </p>
           </div>
         </div>

@@ -1,14 +1,10 @@
-import { useState } from "react";
-import auth from "../../services/authentication";
+import useAuthentication from "@hooks/useAuthentication";
 
 const Register = () => {
-  const [email, setEmail] = useState("");
-  const [password, setPassword] = useState("");
+  const { register, handleSubmit } = useForm();
+  const { authLoading, authError, register } = useAuthentication();
 
-  const SignUp = async (e: any) => {
-    e.preventDefault();
-    await auth.register({ email, password });
-  };
+  const submitForm = async (userData: any) => await register(userData);
 
   return (
     <>
@@ -25,40 +21,46 @@ const Register = () => {
         </div>
 
         <div className="mt-10 sm:mx-auto sm:w-full sm:max-w-sm">
-          <form className="space-y-6" action="#" onSubmit={SignUp}>
+          <form
+            className="space-y-6"
+            action="#"
+            onSubmit={handleSubmit(submitForm)}
+          >
             <div>
               <label
-                htmlFor="first_name"
+                htmlFor="firstName"
                 className="block text-sm font-medium leading-6 text-gray-900"
               >
                 Nombre
               </label>
               <div className="mt-2">
                 <input
-                  id="first_name"
-                  name="first_name"
+                  id="firstName"
+                  name="firstName"
                   type="text"
-                  autoComplete="first_name"
+                  autoComplete="firstName"
                   required
                   className="block w-full rounded-md border-0 py-1.5 px-2 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400  focus:ring-orange-600 sm:text-sm sm:leading-6"
+                  {...register("firstName")}
                 />
               </div>
             </div>
             <div>
               <label
-                htmlFor="last_name"
+                htmlFor="lastName"
                 className="block text-sm font-medium leading-6 text-gray-900"
               >
                 Apellido
               </label>
               <div className="mt-2">
                 <input
-                  id="last_name"
-                  name="last_name"
+                  id="lastName"
+                  name="lastName"
                   type="text"
-                  autoComplete="last_name"
+                  autoComplete="lastName"
                   required
                   className="block w-full rounded-md border-0 py-1.5 px-2 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400  focus:ring-orange-600 sm:text-sm sm:leading-6"
+                  {...register("lastName")}
                 />
               </div>
             </div>
@@ -71,16 +73,13 @@ const Register = () => {
               </label>
               <div className="mt-2">
                 <input
-                  value={email}
-                  onChange={(e) => {
-                    setEmail(e.target.value);
-                  }}
                   id="email"
                   name="email"
                   type="email"
                   autoComplete="email"
                   required
                   className="block w-full rounded-md border-0 py-1.5 px-2 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400  focus:ring-orange-600 sm:text-sm sm:leading-6"
+                  {...register("email")}
                 />
               </div>
             </div>
@@ -96,36 +95,13 @@ const Register = () => {
               </div>
               <div className="mt-2">
                 <input
-                  value={password}
-                  onChange={(e) => {
-                    setPassword(e.target.value);
-                  }}
                   id="password"
                   name="password"
                   type="password"
                   autoComplete="current-password"
                   required
                   className="block w-full rounded-md border-0 py-1.5 px-2 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400  focus:ring-orange-600 sm:text-sm sm:leading-6"
-                />
-              </div>
-            </div>
-            <div>
-              <div className="flex items-center justify-between">
-                <label
-                  htmlFor="password"
-                  className="block text-sm font-medium leading-6 text-gray-900"
-                >
-                  Repetir Contraseña
-                </label>
-              </div>
-              <div className="mt-2">
-                <input
-                  id="repeat_password"
-                  name="repeat_password"
-                  type="password"
-                  autoComplete="current-password"
-                  required
-                  className="block w-full rounded-md border-0 py-1.5 px-2 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400  focus:ring-orange-600 sm:text-sm sm:leading-6"
+                  {...register("password")}
                 />
               </div>
             </div>
