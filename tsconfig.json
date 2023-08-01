@@ -14,7 +14,9 @@
       "@components/*": ["src/components/*"],
       "@routes/*": ["src/routes/*"],
       "@pages/*": ["src/pages/*"],
-      "@layouts/*": ["src/layouts/*"]
+      "@layouts/*": ["src/layouts/*"],
+      "@constants/*": ["src/constants/*"],
+      "@helpers/*": ["src/helpers/*"]
     },
 
     "allowSyntheticDefaultImports": true,

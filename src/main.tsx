@@ -3,8 +3,8 @@ import ReactDOM from "react-dom/client";
 import { createBrowserRouter, RouterProvider } from "react-router-dom";
 import { store } from "./store/configureStore.ts";
 import { Provider } from "react-redux";
-import "./index.css";
 import routes from "./routes/routes.tsx";
+import "./index.css";
 
 const router = createBrowserRouter(routes);
 

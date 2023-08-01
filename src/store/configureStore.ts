@@ -1,13 +1,21 @@
 import { configureStore } from "@reduxjs/toolkit";
+import { setupListeners } from "@reduxjs/toolkit/query/react";
+import { useApi } from "@services/api/api";
 import userSlice from "@store/features/userSlice";
 
 export const store = configureStore({
   reducer: {
     user: userSlice,
+    [useApi.reducerPath]: useApi.reducer, // Add the useApi reducer to the store
   },
+  middleware: (getDefaultMiddleware) =>
+    getDefaultMiddleware().concat(useApi.middleware), // Add the useApi middleware
 });
+
+// Call setupListeners to set up background polling and prefetching
+setupListeners(store.dispatch);
 
 // Infer the `RootState` and `AppDispatch` types from the store itself
 export type RootState = ReturnType<typeof store.getState>;
-// Inferred type: {posts: PostsState, comments: CommentsState, users: UsersState}
+// Inferred type: { user: UserState, ...otherReducers }
 export type AppDispatch = typeof store.dispatch;

@@ -1,12 +1,26 @@
 import Spinner from "@components/Spinner";
 import useAuthentication from "@hooks/useAuthentication";
+import { useGetUserMutation } from "@services/api/api";
 import { useForm } from "react-hook-form";
 
 const Register = () => {
   const { register, handleSubmit } = useForm();
   const { authLoading, authError, authRegister } = useAuthentication();
+  const [
+    getUser, // This is the mutation trigger
+    { isLoading: isLoading }, // You can use the `isLoading` flag, or do custom logic with `status`
+  ] = useGetUserMutation();
 
-  const submitForm = (data: any) => authRegister(data);
+  // const submitForm = (data: any) => authRegister(data);
+  const submitForm = (data: any) => getUser({});
+
+  if (isLoading) {
+    return <div>Loading...</div>;
+  }
+
+  // if (error) {
+  //   return <div>Error</div>;
+  // }
 
   return (
     <>
@@ -122,6 +136,7 @@ const Register = () => {
             >
               {" "}
               Ingresar
+              <div>{JSON.stringify("data")}</div>
             </a>
           </p>
         </div>

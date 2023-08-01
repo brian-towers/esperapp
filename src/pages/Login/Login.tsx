@@ -11,10 +11,7 @@ const Login = () => {
   } = useForm();
   const { authLoading, authError, authLogin } = useAuthentication();
 
-  const submitForm = (data: any) => {
-    console.log(data);
-    authLogin(data);
-  };
+  const submitForm = (data: any) => authLogin(data);
 
   return (
     <>
