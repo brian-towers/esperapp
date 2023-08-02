@@ -1,13 +1,13 @@
-import Spinner from "@components/Spinner";
-import { useAuthentication } from "@hooks/index";
-import { useForm } from "react-hook-form";
+import Spinner from '@components/Spinner';
+import { useAuthentication } from '@hooks/index';
+import { useForm } from 'react-hook-form';
 
 const Login = () => {
   const {
     register,
     handleSubmit,
     watch,
-    formState: { errors },
+    formState: { errors }
   } = useForm();
   const { authLoading, authError, authLogin } = useAuthentication();
 
@@ -17,27 +17,16 @@ const Login = () => {
     <>
       <div className="flex min-h-full flex-col justify-center px-6 py-12 lg:px-8">
         <div className="sm:mx-auto sm:w-full sm:max-w-sm">
-          <img
-            className="logo mx-auto h-10 w-auto"
-            src="logo.png"
-            alt="EsperaApp"
-          />
+          <img className="logo mx-auto h-10 w-auto" src="logo.png" alt="EsperaApp" />
           <h2 className="mt-4 text-center text-2xl font-bold leading-9 tracking-tight text-gray-900">
             Ingrese a su cuenta
           </h2>
         </div>
 
         <div className="mt-10 sm:mx-auto sm:w-full sm:max-w-sm">
-          <form
-            className="space-y-6"
-            action="#"
-            onSubmit={handleSubmit(submitForm)}
-          >
+          <form className="space-y-6" action="#" onSubmit={handleSubmit(submitForm)}>
             <div>
-              <label
-                htmlFor="email"
-                className="block text-sm font-medium leading-6 text-gray-900"
-              >
+              <label htmlFor="email" className="block text-sm font-medium leading-6 text-gray-900">
                 Email
               </label>
               <div className="mt-2">
@@ -47,17 +36,14 @@ const Login = () => {
                   autoComplete="email"
                   required
                   className="block w-full rounded-md border-0 py-1.5 px-2 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400  focus:ring-orange-600 sm:text-sm sm:leading-6"
-                  {...register("username")}
+                  {...register('username')}
                 />
               </div>
             </div>
 
             <div>
               <div className="flex items-center justify-between">
-                <label
-                  htmlFor="password"
-                  className="block text-sm font-medium leading-6 text-gray-900"
-                >
+                <label htmlFor="password" className="block text-sm font-medium leading-6 text-gray-900">
                   Contraseña
                 </label>
               </div>
@@ -68,14 +54,11 @@ const Login = () => {
                   autoComplete="current-password"
                   required
                   className="block w-full rounded-md border-0 py-1.5 px-2 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400  focus:ring-orange-600 sm:text-sm sm:leading-6"
-                  {...register("password")}
+                  {...register('password')}
                 />
               </div>
               <div className="flex text-sm mt-1 justify-end">
-                <a
-                  href="#"
-                  className="font-semibold text-orange-600 hover:text-orange-500 "
-                >
+                <a href="#" className="font-semibold text-orange-600 hover:text-orange-500 ">
                   ¿Olvidó su contraseña?
                 </a>
               </div>
@@ -86,15 +69,13 @@ const Login = () => {
                 type="submit"
                 className="flex w-full text-white bg-orange-600 hover:bg-orange-500 rounded-md justify-center font-semibold px-3 py-1.5 text-sm leading-6 shadow-md"
               >
-                {authLoading ? <Spinner /> : "Ingresar"}
+                {authLoading ? <Spinner /> : 'Ingresar'}
               </button>
             </div>
           </form>
           <div className="inline-flex items-center justify-center w-full">
             <hr className="w-64 h-px my-8 bg-gray-200 border-0" />
-            <span className="absolute px-3 font-medium text-gray-500 -translate-x-1/2 bg-white left-1/2 ">
-              o
-            </span>
+            <span className="absolute px-3 font-medium text-gray-500 -translate-x-1/2 bg-white left-1/2 ">o</span>
           </div>
           <div className="px-6 sm:px-0 max-w-sm">
             <button
@@ -121,11 +102,8 @@ const Login = () => {
           </div>
           <div className="flex mt-10 justify-center items-center text-sm text-gray-500">
             <p>
-              ¿No tiene una cuenta?{" "}
-              <a
-                href="/register"
-                className="font-semibold leading-6 text-orange-600 hover:text-orange-500"
-              >
+              ¿No tiene una cuenta?{' '}
+              <a href="/register" className="font-semibold leading-6 text-orange-600 hover:text-orange-500">
                 Registrarse
               </a>
             </p>

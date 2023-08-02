@@ -1,13 +1,9 @@
-import {
-  CognitoUserPool,
-  AuthenticationDetails,
-  CognitoUser,
-} from "amazon-cognito-identity-js";
-import { CognitoConfig } from "./cognito.types";
+import { CognitoUserPool, AuthenticationDetails, CognitoUser } from 'amazon-cognito-identity-js';
+import { CognitoConfig } from './cognito.types';
 
 export const DEFAULT_COGNITO_CONFIG: CognitoConfig = {
-  UserPoolId: "us-east-1_CNgGG4ONJ",
-  ClientId: "3d0l56j0gp422qhof3as06abgk",
+  UserPoolId: 'us-east-1_CNgGG4ONJ',
+  ClientId: '3d0l56j0gp422qhof3as06abgk'
 };
 
 class Cognito {
@@ -22,44 +18,38 @@ class Cognito {
 
   // REGISTER USER
   async register(userData: { email: string; password: string }) {
-    this.userPool.signUp(
-      userData.email,
-      userData.password,
-      [],
-      [],
-      function (err: any, result: any) {
-        if (err) {
-          alert(err.message || JSON.stringify(err));
-          return;
-        }
-        const cognitoUser = result.user;
-        console.log("user name is " + cognitoUser.getUsername());
-      }
-    );
-  }
-
-  // CONFIRM REGISTRATION
-  async confirmRegistration() {
-    const userData = {
-      Username: "username",
-      Pool: this.userPool,
-    };
-
-    const cognitoUser = new CognitoUser(userData);
-    cognitoUser.confirmRegistration("123456", true, function (err, result) {
+    this.userPool.signUp(userData.email, userData.password, [], [], function (err: any, result: any) {
       if (err) {
         alert(err.message || JSON.stringify(err));
         return;
       }
-      console.log("call result: " + result);
+      const cognitoUser = result.user;
+      console.log('user name is ' + cognitoUser.getUsername());
+    });
+  }
+
+  // CONFIRM REGISTRATION
+  async confirmRegistration(code: string) {
+    const userData = {
+      Username: 'username',
+      Pool: this.userPool
+    };
+
+    const cognitoUser = new CognitoUser(userData);
+    cognitoUser.confirmRegistration(code, true, function (err, result) {
+      if (err) {
+        alert(err.message || JSON.stringify(err));
+        return;
+      }
+      console.log('call result: ' + result);
     });
   }
 
   // RESEND CONFIRMATION
   async resendConfirmationCode() {
     const userData = {
-      Username: "username",
-      Pool: this.userPool,
+      Username: 'username',
+      Pool: this.userPool
     };
 
     const cognitoUser = new CognitoUser(userData);
@@ -68,28 +58,22 @@ class Cognito {
         alert(err.message || JSON.stringify(err));
         return;
       }
-      console.log("call result: " + result);
+      console.log('call result: ' + result);
     });
   }
 
   // LOGIN USER
-  async login(credentials: {
-    username: string;
-    password: string;
-  }): Promise<string> {
-    console.log(credentials.username, credentials.password);
+  async login(credentials: { username: string; password: string }): Promise<string> {
     return new Promise((resolve, reject) => {
       const authenticationData = {
         Username: credentials.username,
-        Password: credentials.password,
+        Password: credentials.password
       };
-      const authenticationDetails = new AuthenticationDetails(
-        authenticationData
-      );
+      const authenticationDetails = new AuthenticationDetails(authenticationData);
 
       const userData = {
         Username: credentials.username,
-        Pool: this.userPool,
+        Pool: this.userPool
       };
 
       const cognitoUser = new CognitoUser(userData);
@@ -124,9 +108,8 @@ class Cognito {
         },
 
         onFailure: function (err) {
-          alert(err.message || JSON.stringify(err));
           reject(JSON.stringify(err));
-        },
+        }
       });
     });
   }
@@ -134,29 +117,25 @@ class Cognito {
   // CHANGE PASSWORD
   async changePassword() {
     const userData = {
-      Username: "username",
-      Pool: this.userPool,
+      Username: 'username',
+      Pool: this.userPool
     };
 
     const cognitoUser = new CognitoUser(userData);
-    cognitoUser.changePassword(
-      "oldPassword",
-      "newPassword",
-      function (err, result) {
-        if (err) {
-          alert(err.message || JSON.stringify(err));
-          return;
-        }
-        console.log("call result: " + result);
+    cognitoUser.changePassword('oldPassword', 'newPassword', function (err, result) {
+      if (err) {
+        alert(err.message || JSON.stringify(err));
+        return;
       }
-    );
+      console.log('call result: ' + result);
+    });
   }
 
   // LOGOUT
   async logout() {
     const userData = {
-      Username: "username",
-      Pool: this.userPool,
+      Username: 'username',
+      Pool: this.userPool
     };
 
     const cognitoUser = new CognitoUser(userData);

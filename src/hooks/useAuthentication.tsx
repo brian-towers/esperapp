@@ -1,7 +1,9 @@
-import { useState } from "react";
-import { useAppDispatch } from "@hooks/index";
-import { setAuthToken } from "@store/features/userSlice";
-import auth from "@services/authentication";
+import { useState } from 'react';
+import { useAppDispatch } from '@hooks/index';
+import { setAuthToken } from '@store/features/userSlice';
+import { useNavigate } from 'react-router-dom';
+
+import auth from '@services/authentication';
 
 interface userData {
   firstName: string;
@@ -11,21 +13,21 @@ interface userData {
 }
 
 const useAuthentication = () => {
+  const navigate = useNavigate();
   const dispatch = useAppDispatch();
   const [authLoading, setAuthLoading] = useState<boolean>(false);
   const [authError, setAuthError] = useState<string | null>(null);
 
-  const authLogin = async (credentials: {
-    username: string;
-    password: string;
-  }): Promise<boolean> => {
+  const authLogin = async (credentials: { username: string; password: string }): Promise<boolean> => {
     try {
       setAuthLoading(true);
       const token = await auth.login(credentials);
       dispatch(setAuthToken(token));
-      setAuthLoading(false);
+      navigate('/');
+      //  setAuthLoading(false);
       return true;
     } catch (error: any) {
+      console.log('brian error 1');
       setAuthError(error.message as string);
       setAuthLoading(false);
       return false;
@@ -38,7 +40,7 @@ const useAuthentication = () => {
       await auth.logout();
       setAuthLoading(false);
     } catch (error) {
-      setAuthError("An error occurred while logging out");
+      setAuthError('An error occurred while logging out');
       setAuthLoading(false);
     }
   };
@@ -49,7 +51,7 @@ const useAuthentication = () => {
       await auth.register(userData);
       setAuthLoading(false);
     } catch (error) {
-      setAuthError("An error occurred while registering the user");
+      setAuthError('An error occurred while registering the user');
       setAuthLoading(false);
     }
   };
