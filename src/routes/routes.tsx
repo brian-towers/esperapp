@@ -1,6 +1,6 @@
 import { Route, Routes } from 'react-router-dom';
 import { Base, Dashboard } from '@layouts/index';
-import { ConfirmCode, Home, Login, Register } from '@pages/index';
+import { ConfirmCode, Home, InitialConfig, Login, Register } from '@pages/index';
 import PrivateRoute from '@helpers/privateRoute';
 import useAppSelector from '@hooks/useAppSelector';
 
@@ -8,6 +8,7 @@ const HOME_ROUTE = '/';
 const LOGIN_ROUTE = '/login';
 const REGISTER_ROUTE = '/register';
 const CONFIRM_CODE = '/confirm';
+const CREATE_RESTAURANT = '/create-restaurant';
 
 const AppRoutes = (): JSX.Element => {
   const isAuthenticated = useAppSelector((state) => state.user.authToken);
@@ -17,6 +18,14 @@ const AppRoutes = (): JSX.Element => {
 
   return (
     <Routes>
+      <Route
+        path={CREATE_RESTAURANT}
+        element={
+          <Base>
+            <InitialConfig />
+          </Base>
+        }
+      />
       {/* 
       Unguarded Routes 
       <Route path={'post-authentication'} element={<PostAuthentication />} /> 

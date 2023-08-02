@@ -24,7 +24,7 @@ const Login = () => {
         </div>
 
         <div className="mt-10 sm:mx-auto sm:w-full sm:max-w-sm">
-          <form className="space-y-6" action="#" onSubmit={handleSubmit(submitForm)}>
+          <form className="space-y-6" onSubmit={handleSubmit(submitForm)}>
             <div>
               <label htmlFor="email" className="block text-sm font-medium leading-6 text-gray-900">
                 Email
@@ -102,7 +102,7 @@ const Login = () => {
           </div>
           <div className="flex mt-10 justify-center items-center text-sm text-gray-500">
             <p>
-              ¿No tiene una cuenta?{' '}
+              ¿No tiene una cuenta?
               <a href="/register" className="font-semibold leading-6 text-orange-600 hover:text-orange-500">
                 Registrarse
               </a>

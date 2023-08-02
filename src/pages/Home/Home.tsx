@@ -1,4 +1,3 @@
-import { InitialConfig } from '@pages/index';
 import { useGetUserMutation } from '@services/api/api';
 
 const Register = () => {
@@ -12,7 +11,7 @@ const Register = () => {
   //   return <div>Error</div>;
   // }
 
-  return <InitialConfig />;
+  return <>{'Hola'}</>;
 };
 
 export default Register;
