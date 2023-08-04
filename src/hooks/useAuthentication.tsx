@@ -27,8 +27,8 @@ const useAuthentication = () => {
       //  setAuthLoading(false);
       return true;
     } catch (error: any) {
-      console.log('brian error 1');
-      setAuthError(error.message as string);
+      const err = JSON.parse(error);
+      setAuthError(err.name);
       setAuthLoading(false);
       return false;
     }

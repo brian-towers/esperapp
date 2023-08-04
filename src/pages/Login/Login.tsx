@@ -21,8 +21,8 @@ const Login = () => {
           <h2 className="mt-4 text-center text-2xl font-bold leading-9 tracking-tight text-gray-900">
             Ingrese a su cuenta
           </h2>
+          <div className="w-ful flex justify-centerl">{authError && authError}</div>
         </div>
-
         <div className="mt-10 sm:mx-auto sm:w-full sm:max-w-sm">
           <form className="space-y-6" onSubmit={handleSubmit(submitForm)}>
             <div>
@@ -34,6 +34,7 @@ const Login = () => {
                   id="email"
                   type="email"
                   autoComplete="email"
+                  disabled={authLoading}
                   required
                   className="block w-full rounded-md border-0 py-1.5 px-2 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400  focus:ring-orange-600 sm:text-sm sm:leading-6"
                   {...register('email')}
@@ -51,7 +52,8 @@ const Login = () => {
                 <input
                   id="password"
                   type="password"
-                  autoComplete="current-password"
+                  autoComplete="password"
+                  disabled={authLoading}
                   required
                   className="block w-full rounded-md border-0 py-1.5 px-2 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400  focus:ring-orange-600 sm:text-sm sm:leading-6"
                   {...register('password')}
@@ -80,6 +82,7 @@ const Login = () => {
           <div className="px-6 sm:px-0 max-w-sm">
             <button
               type="submit"
+              disabled={authLoading}
               className="flex w-full text-white bg-[#4285F4] hover:bg-[#4285F4]/90 rounded-md justify-between items-center font-semibold px-3 py-1.5 text-sm leading-6 shadow-md"
             >
               <svg
