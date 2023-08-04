@@ -29,9 +29,9 @@ class Cognito {
   }
 
   // CONFIRM REGISTRATION
-  async confirmRegistration(code: string) {
+  async confirmRegistration(email: string, code: string) {
     const userData = {
-      Username: 'username',
+      Username: email,
       Pool: this.userPool
     };
 
@@ -46,9 +46,9 @@ class Cognito {
   }
 
   // RESEND CONFIRMATION
-  async resendConfirmationCode() {
+  async resendConfirmationCode(email: string) {
     const userData = {
-      Username: 'username',
+      Username: email,
       Pool: this.userPool
     };
 
@@ -63,16 +63,16 @@ class Cognito {
   }
 
   // LOGIN USER
-  async login(credentials: { username: string; password: string }): Promise<string> {
+  async login(email: string, password: string): Promise<string> {
     return new Promise((resolve, reject) => {
       const authenticationData = {
-        Username: credentials.username,
-        Password: credentials.password
+        Username: email,
+        Password: password
       };
       const authenticationDetails = new AuthenticationDetails(authenticationData);
 
       const userData = {
-        Username: credentials.username,
+        Username: email,
         Pool: this.userPool
       };
 

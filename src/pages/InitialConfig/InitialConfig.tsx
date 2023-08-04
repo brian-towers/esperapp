@@ -8,7 +8,7 @@ import { useState } from 'react';
 import Card from '@components/Card';
 
 const steps = ['Nombre del establecimiento', 'Mesas disponibles', 'Estados de las mesas', 'Miembros del equipo'];
-const tableStatus = ['Disponible', 'Ocupada', 'Reservada', 'Estado 1', 'Estado 2', 'Estado 3'];
+const tableStatusOptions = ['Disponible', 'Ocupada', 'Reservada', 'Estado 1', 'Estado 2', 'Estado 3'];
 
 interface Collaborator {
   email: string;
@@ -17,13 +17,18 @@ interface Collaborator {
 interface Business {
   name: string;
   tables: number;
-  tableStatus: string[];
+  tableStatusOptions: string[];
   collaborators: Collaborator[];
 }
 
 export default function InitialConfig() {
   const [activeStep, setActiveStep] = useState(0);
-  const [business, setBusiness] = useState<Business>({ name: '', tables: 0, tableStatus: [], collaborators: [] });
+  const [business, setBusiness] = useState<Business>({
+    name: '',
+    tables: 0,
+    tableStatusOptions: [],
+    collaborators: []
+  });
 
   const handleNext = () => {
     setActiveStep((prevActiveStep) => prevActiveStep + 1);
@@ -40,56 +45,65 @@ export default function InitialConfig() {
   const handleTableStatus = (status: string) => {
     setBusiness((prevBusiness: Business) => ({
       ...prevBusiness,
-      tableStatus: [...prevBusiness.tableStatus, status]
+      tableStatusOptions: [...prevBusiness.tableStatusOptions, status]
     }));
   };
 
   return (
     <>
-      <div className="flex min-h-full w-full justify-center px-6 py-12 lg:px-8">
-        <Card>
-          <Box sx={{ width: '100%' }}>
-            <Stepper activeStep={activeStep} alternativeLabel>
-              {steps.map((label, index) => {
-                const stepProps: { completed?: boolean } = {};
-                const labelProps: {
-                  optional?: React.ReactNode;
-                } = {};
+      <div className="flex min-h-full w-full flex-col justify-center px-6 py-12 lg:px-8">
+        <div className="sm:mx-auto sm:w-full sm:max-w-sm">
+          <img className="logo mx-auto h-10 w-auto" src="logo.png" alt="EsperaApp" />
+        </div>
+        <div className="flex justify-center sm:mx-auto sm:w-full ">
+          <Card>
+            <Box sx={{ width: '100%' }}>
+              <Stepper activeStep={activeStep} alternativeLabel>
+                {steps.map((label, index) => {
+                  const stepProps: { completed?: boolean } = {};
+                  const labelProps: {
+                    optional?: React.ReactNode;
+                  } = {};
 
-                return (
-                  <Step key={label} {...stepProps}>
-                    <StepLabel {...labelProps}>{label}</StepLabel>
-                  </Step>
-                );
-              })}
-            </Stepper>
-            {activeStep === steps.length ? (
-              <>
-                <Typography sx={{ mt: 2, mb: 1 }}>All steps completed - you&apos;re finished</Typography>
-                <Box sx={{ display: 'flex', flexDirection: 'row', pt: 2 }}>
-                  <Box sx={{ flex: '1 1 auto' }} />
-                  <Button onClick={handleReset}>Reset</Button>
-                </Box>
-              </>
-            ) : (
-              <>
-                {business}
-                {activeStep == 0 && <StepOne />}
-                {activeStep == 1 && <StepTwo />}
-                {activeStep == 2 && <StepThree handleTableStatus={handleTableStatus} />}
-                {activeStep == 3 && <StepFour />}
+                  return (
+                    <Step key={label} {...stepProps}>
+                      <StepLabel {...labelProps}>{label}</StepLabel>
+                    </Step>
+                  );
+                })}
+              </Stepper>
+              {activeStep === steps.length ? (
+                <>
+                  <Typography sx={{ mt: 2, mb: 1 }}>All steps completed - you&apos;re finished</Typography>
+                  <Box sx={{ display: 'flex', flexDirection: 'row', pt: 2 }}>
+                    <Box sx={{ flex: '1 1 auto' }} />
+                    <Button onClick={handleReset}>Reset</Button>
+                  </Box>
+                </>
+              ) : (
+                <>
+                  {activeStep == 0 && <StepOne />}
+                  {activeStep == 1 && <StepTwo />}
+                  {activeStep == 2 && <StepThree handleTableStatus={handleTableStatus} />}
+                  {activeStep == 3 && <StepFour />}
 
-                <Box sx={{ display: 'flex', flexDirection: 'row', pt: 2 }}>
-                  <Button color="inherit" disabled={activeStep === 0} onClick={handleBack} sx={{ mr: 1 }}>
-                    Atrás
-                  </Button>
-                  <Box sx={{ flex: '1 1 auto' }} />
-                  <Button onClick={handleNext}>{activeStep === steps.length - 1 ? 'Finalizar' : 'Siguiente'}</Button>
-                </Box>
-              </>
-            )}
-          </Box>
-        </Card>
+                  <Box sx={{ display: 'flex', flexDirection: 'row', pt: 2 }}>
+                    <Button color="inherit" disabled={activeStep === 0} onClick={handleBack} sx={{ mr: 1 }}>
+                      Atrás
+                    </Button>
+                    <Box sx={{ flex: '1 1 auto' }} />
+                    <button
+                      className="flex  text-white bg-[#4285F4] hover:bg-[#4285F4]/90 rounded-md justify-between items-center font-semibold px-3 py-1.5 text-sm leading-6 shadow-md"
+                      onClick={handleNext}
+                    >
+                      {activeStep === steps.length - 1 ? 'Finalizar' : 'Siguiente'}
+                    </button>
+                  </Box>
+                </>
+              )}
+            </Box>
+          </Card>
+        </div>
       </div>
     </>
   );
@@ -146,7 +160,7 @@ const StepThree = ({ handleTableStatus }: { handleTableStatus: (status: string) 
         </label>
         <div className="flex justify-center mt-4">
           <div className="grid grid-cols-3 gap-4">
-            {tableStatus.map((status) => {
+            {tableStatusOptions.map((status) => {
               return (
                 <button
                   onClick={() => handleTableStatus(status)}

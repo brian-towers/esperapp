@@ -7,7 +7,7 @@ import useAppSelector from '@hooks/useAppSelector';
 const HOME_ROUTE = '/';
 const LOGIN_ROUTE = '/login';
 const REGISTER_ROUTE = '/register';
-const CONFIRM_CODE = '/confirm';
+const CONFIRM_CODE = '/confirm-code';
 const CREATE_RESTAURANT = '/create-restaurant';
 
 const AppRoutes = (): JSX.Element => {

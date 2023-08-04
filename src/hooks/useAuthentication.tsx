@@ -18,10 +18,10 @@ const useAuthentication = () => {
   const [authLoading, setAuthLoading] = useState<boolean>(false);
   const [authError, setAuthError] = useState<string | null>(null);
 
-  const authLogin = async (credentials: { username: string; password: string }): Promise<boolean> => {
+  const authLogin = async (email: string, password: string): Promise<boolean> => {
     try {
       setAuthLoading(true);
-      const token = await auth.login(credentials);
+      const token = await auth.login(email, password);
       dispatch(setAuthToken(token));
       navigate('/');
       //  setAuthLoading(false);
@@ -49,6 +49,7 @@ const useAuthentication = () => {
     try {
       setAuthLoading(true);
       await auth.register(userData);
+      navigate('/confirm-code?email=' + userData.email);
       setAuthLoading(false);
     } catch (error) {
       setAuthError('An error occurred while registering the user');
@@ -56,7 +57,19 @@ const useAuthentication = () => {
     }
   };
 
-  return { authLoading, authError, authLogin, authLogout, authRegister };
+  const confirmRegistration = async (email: string, code: string) => {
+    try {
+      setAuthLoading(true);
+      await auth.confirmRegistration(email, code);
+      navigate('/');
+      setAuthLoading(false);
+    } catch (error) {
+      setAuthError('An error occurred while registering the user');
+      setAuthLoading(false);
+    }
+  };
+
+  return { authLoading, authError, authLogin, authLogout, authRegister, confirmRegistration };
 };
 
 export default useAuthentication;
