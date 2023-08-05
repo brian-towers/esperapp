@@ -19,7 +19,10 @@ const Login = () => {
   } = useForm();
   const { authLoading, authError, authLogin } = useAuthentication();
 
-  const submitForm = (data: any) => authLogin(data.email, data.password);
+  const submitForm = (data: any) => {
+    console.log(data);
+    authLogin(data.email, data.password);
+  };
 
   return (
     <>
@@ -29,11 +32,11 @@ const Login = () => {
           <h2 className="mt-4 text-center text-2xl font-bold leading-9 tracking-tight text-gray-900">
             Ingrese a su cuenta
           </h2>
+        </div>
+        <div className="mt-10 sm:mx-auto sm:w-full sm:max-w-sm">
           <div className="flex justify-center w-full text-red-600 font-medium">
             {authError && exceptions[authError]}
           </div>
-        </div>
-        <div className="mt-10 sm:mx-auto sm:w-full sm:max-w-sm">
           <form className="space-y-6" onSubmit={handleSubmit(submitForm)}>
             <div>
               <label htmlFor="email" className="block text-sm font-medium leading-6 text-gray-900">

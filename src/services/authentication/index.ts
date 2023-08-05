@@ -4,7 +4,7 @@ const AUTH_SERVICE = 'COGNITO'; // set to an env variable
 
 interface authentication {
   login(email: string, password: string): Promise<string>;
-  register(userData: { email: string; password: string }): Promise<void>;
+  register(userData: { email: string; password: string }): Promise<string>;
   logout(): Promise<any>;
   resendConfirmationCode(email: string): Promise<any>;
   confirmRegistration(email: string, code: string): Promise<any>;

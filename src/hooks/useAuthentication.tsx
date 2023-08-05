@@ -22,9 +22,9 @@ const useAuthentication = () => {
     try {
       setAuthLoading(true);
       const token = await auth.login(email, password);
+      localStorage.setItem('idToken', token);
       dispatch(setAuthToken(token));
       navigate('/');
-      //  setAuthLoading(false);
       return true;
     } catch (error: any) {
       const err = JSON.parse(error);
@@ -48,11 +48,11 @@ const useAuthentication = () => {
   const authRegister = async (userData: userData) => {
     try {
       setAuthLoading(true);
-      await auth.register(userData);
-      navigate('/confirm-code?email=' + userData.email);
-      setAuthLoading(false);
-    } catch (error) {
-      setAuthError('An error occurred while registering the user');
+      const user = await auth.register(userData);
+      if (!!user) navigate('/confirm-code?email=' + userData.email);
+    } catch (error: any) {
+      const err = JSON.parse(error);
+      setAuthError(err.name);
       setAuthLoading(false);
     }
   };
