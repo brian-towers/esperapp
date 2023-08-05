@@ -2,6 +2,14 @@ import Spinner from '@components/Spinner';
 import { useAuthentication } from '@hooks/index';
 import { useForm } from 'react-hook-form';
 
+interface Exceptions {
+  [key: string]: string; // Use an index signature to allow any string key
+}
+
+const exceptions: Exceptions = {
+  NotAuthorizedException: 'email y/o contraseña incorrectos.'
+};
+
 const Login = () => {
   const {
     register,
@@ -21,7 +29,9 @@ const Login = () => {
           <h2 className="mt-4 text-center text-2xl font-bold leading-9 tracking-tight text-gray-900">
             Ingrese a su cuenta
           </h2>
-          <div className="w-ful flex justify-centerl">{authError && authError}</div>
+          <div className="flex justify-center w-full text-red-600 font-medium">
+            {authError && exceptions[authError]}
+          </div>
         </div>
         <div className="mt-10 sm:mx-auto sm:w-full sm:max-w-sm">
           <form className="space-y-6" onSubmit={handleSubmit(submitForm)}>
@@ -107,7 +117,7 @@ const Login = () => {
             <p>
               ¿No tiene una cuenta?
               <a href="/register" className="font-semibold leading-6 text-orange-600 hover:text-orange-500">
-                Registrarse
+                {' Crear cuenta'}
               </a>
             </p>
           </div>
