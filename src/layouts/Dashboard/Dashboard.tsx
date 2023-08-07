@@ -101,13 +101,11 @@ const Dashboard = ({ children }: { children: ReactNode }) => {
                       role="menu"
                       aria-orientation="vertical"
                       aria-labelledby="user-menu-button"
-                      tabIndex="-1"
                     >
                       <a
                         href="#"
                         className="block px-4 py-2 text-sm text-gray-700"
                         role="menuitem"
-                        tabIndex="-1"
                         id="user-menu-item-0"
                       >
                         Your Profile
@@ -116,7 +114,6 @@ const Dashboard = ({ children }: { children: ReactNode }) => {
                         href="#"
                         className="block px-4 py-2 text-sm text-gray-700"
                         role="menuitem"
-                        tabIndex="-1"
                         id="user-menu-item-1"
                       >
                         Settings
@@ -125,7 +122,6 @@ const Dashboard = ({ children }: { children: ReactNode }) => {
                         href="#"
                         className="block px-4 py-2 text-sm text-gray-700"
                         role="menuitem"
-                        tabIndex="-1"
                         id="user-menu-item-2"
                       >
                         Sign out

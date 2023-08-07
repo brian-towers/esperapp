@@ -5,13 +5,13 @@ import { getApiHeaders } from '@helpers/getApiHeaders';
 // API Service is created with react-query lib
 export const useApi = createApi({
   baseQuery: fetchBaseQuery({
-    baseUrl: config.url.API_URL,
+    baseUrl: config.dev.url.API_URL,
     prepareHeaders: (headers) => getApiHeaders(headers)
   }),
   endpoints: (build) => ({
     getUser: build.mutation({
       query: (body) => ({
-        url: config.url.API_URL_GET_USERS_BY_TYPE,
+        url: config.dev.url.API_URL,
         method: 'POST',
         body: body
       })
