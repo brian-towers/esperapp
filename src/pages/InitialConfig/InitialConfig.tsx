@@ -1,14 +1,15 @@
-import Box from '@mui/material/Box';
-import Stepper from '@mui/material/Stepper';
-import Step from '@mui/material/Step';
-import StepLabel from '@mui/material/StepLabel';
-import Button from '@mui/material/Button';
-import Typography from '@mui/material/Typography';
 import { useState } from 'react';
-import Card from '@components/Card';
+import Stepper from '@components/Stepper';
 
-const steps = ['Nombre del establecimiento', 'Mesas disponibles', 'Estados de las mesas', 'Miembros del equipo'];
+const stepss = ['Nombre del establecimiento', 'Mesas disponibles', 'Estados de las mesas', 'Miembros del equipo'];
 const tableStatusOptions = ['Disponible', 'Ocupada', 'Reservada', 'Estado 1', 'Estado 2', 'Estado 3'];
+
+const steps = [
+  { id: '01', name: 'Nombre del establecimiento', href: '#', status: 'complete' },
+  { id: '02', name: 'Mesas disponibles', href: '#', status: 'current' },
+  { id: '03', name: 'Estados de las mesas', href: '#', status: 'upcoming' },
+  { id: '04', name: 'Miembros del equipo', href: '#', status: 'upcoming' }
+];
 
 interface Collaborator {
   email: string;
@@ -22,7 +23,7 @@ interface Business {
 }
 
 export default function InitialConfig() {
-  const [activeStep, setActiveStep] = useState(0);
+  const [currentStep, setCurrentStep] = useState(steps[0]);
   const [business, setBusiness] = useState<Business>({
     name: '',
     tables: 0,
@@ -30,17 +31,11 @@ export default function InitialConfig() {
     collaborators: []
   });
 
-  const handleNext = () => {
-    setActiveStep((prevActiveStep) => prevActiveStep + 1);
-  };
+  const handleNext = () => {};
 
-  const handleBack = () => {
-    setActiveStep((prevActiveStep) => prevActiveStep - 1);
-  };
+  const handleBack = () => {};
 
-  const handleReset = () => {
-    setActiveStep(0);
-  };
+  const handleReset = () => {};
 
   const handleTableStatus = (status: string) => {
     setBusiness((prevBusiness: Business) => ({
@@ -51,58 +46,24 @@ export default function InitialConfig() {
 
   return (
     <>
+      <Stepper steps={steps} />
       <div className="flex min-h-full w-full flex-col justify-center px-6 py-12 lg:px-8">
-        <div className="sm:mx-auto sm:w-full sm:max-w-sm">
-          <img className="logo mx-auto h-10 w-auto" src="logo.png" alt="EsperaApp" />
-        </div>
-        <div className="flex justify-center sm:mx-auto sm:w-full ">
-          <Card>
-            <Box sx={{ width: '100%' }}>
-              <Stepper activeStep={activeStep} alternativeLabel>
-                {steps.map((label, index) => {
-                  const stepProps: { completed?: boolean } = {};
-                  const labelProps: {
-                    optional?: React.ReactNode;
-                  } = {};
-
-                  return (
-                    <Step key={label} {...stepProps}>
-                      <StepLabel {...labelProps}>{label}</StepLabel>
-                    </Step>
-                  );
-                })}
-              </Stepper>
-              {activeStep === steps.length ? (
-                <>
-                  <Typography sx={{ mt: 2, mb: 1 }}>All steps completed - you&apos;re finished</Typography>
-                  <Box sx={{ display: 'flex', flexDirection: 'row', pt: 2 }}>
-                    <Box sx={{ flex: '1 1 auto' }} />
-                    <Button onClick={handleReset}>Reset</Button>
-                  </Box>
-                </>
-              ) : (
-                <>
-                  {activeStep == 0 && <StepOne />}
-                  {activeStep == 1 && <StepTwo />}
-                  {activeStep == 2 && <StepThree handleTableStatus={handleTableStatus} />}
-                  {activeStep == 3 && <StepFour />}
-
-                  <Box sx={{ display: 'flex', flexDirection: 'row', pt: 2 }}>
-                    <Button color="inherit" disabled={activeStep === 0} onClick={handleBack} sx={{ mr: 1 }}>
-                      Atrás
-                    </Button>
-                    <Box sx={{ flex: '1 1 auto' }} />
-                    <button
-                      className="flex  text-white bg-[#4285F4] hover:bg-[#4285F4]/90 rounded-md justify-between items-center font-semibold px-3 py-1.5 text-sm leading-6 shadow-md"
-                      onClick={handleNext}
-                    >
-                      {activeStep === steps.length - 1 ? 'Finalizar' : 'Siguiente'}
-                    </button>
-                  </Box>
-                </>
-              )}
-            </Box>
-          </Card>
+        <div className="flex-col justify-center sm:mx-auto sm:w-full ">
+          <StepOne />{' '}
+          <div className="flex min-w-md justify-between space-x-4">
+            <button
+              type="submit"
+              className="flex max-w-sm text-orange-600 border-orange-600 rounded-md justify-center font-semibold px-3 py-1.5 text-sm leading-6 shadow-md"
+            >
+              {'Atras'}
+            </button>
+            <button
+              type="submit"
+              className="flex max-w-sm text-white bg-orange-600 hover:bg-orange-500 rounded-md justify-center font-semibold px-3 py-1.5 text-sm leading-6 shadow-md"
+            >
+              {'Siguiente'}
+            </button>
+          </div>
         </div>
       </div>
     </>
@@ -112,11 +73,12 @@ export default function InitialConfig() {
 const StepOne = () => {
   return (
     <div className="flex justify-center my-8">
-      <div className="flex-col  mt-8">
-        <label htmlFor="establecimiento" className="block text-xl leading-6 text-gray-900">
-          Indique el nombre de su establecimiento
-        </label>
-        <div className="flex justify-center mt-4">
+      <div className="flex-col">
+        <div className="sm:mx-auto sm:w-full flex justify-center sm:max-w-sm">
+          <h1 className="text-7xl font-quicksand">¡Hola!</h1>
+        </div>
+        <p className="block text-2xl leading-6 text-gray-900 mt-8 ">Indicanos el nombre de tu establecimiento</p>
+        <div className="flex justify-center mt-8">
           <input
             id="establecimiento"
             type="establecimiento"
