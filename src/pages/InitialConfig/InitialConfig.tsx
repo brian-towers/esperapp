@@ -1,5 +1,6 @@
 import { useState } from 'react';
 import Stepper from '@components/Stepper';
+import { XCircleIcon } from '@heroicons/react/outline';
 
 const stepss = ['Nombre del establecimiento', 'Mesas disponibles', 'Estados de las mesas', 'Miembros del equipo'];
 const tableStatusOptions = ['Disponible', 'Ocupada', 'Reservada', 'Estado 1', 'Estado 2', 'Estado 3'];
@@ -47,21 +48,35 @@ export default function InitialConfig() {
   return (
     <>
       <Stepper steps={steps} />
-      <div className="flex min-h-full w-full flex-col justify-center px-6 py-12 lg:px-8">
-        <div className="flex-col justify-center sm:mx-auto sm:w-full ">
-          <StepOne />{' '}
-          <div className="flex min-w-md justify-between space-x-4">
+      <div className="flex w-full justify-center ">
+        <div className="flex min-h-full w-1/3 flex-col justify-center px-6 py-12 lg:px-8">
+          <StepOne />
+          <div className="flex justify-between space-x-4">
             <button
               type="submit"
-              className="flex max-w-sm text-orange-600 border-orange-600 rounded-md justify-center font-semibold px-3 py-1.5 text-sm leading-6 shadow-md"
+              className="flex max-w-sm text-orange-600 border border-orange-600 rounded-md justify-center font-semibold px-3 py-1.5 text-sm leading-6 "
             >
               {'Atras'}
             </button>
             <button
               type="submit"
-              className="flex max-w-sm text-white bg-orange-600 hover:bg-orange-500 rounded-md justify-center font-semibold px-3 py-1.5 text-sm leading-6 shadow-md"
+              className="inline-flex items-center max-w-sm text-white bg-orange-600 hover:bg-orange-500 rounded-md font-semibold px-3 py-1.5 text-sm leading-6"
             >
               {'Siguiente'}
+              <svg
+                xmlns="http://www.w3.org/2000/svg"
+                fill="none"
+                viewBox="0 0 24 24"
+                stroke-width="1.5"
+                stroke="currentColor"
+                className="w-6 h-6 ml-2"
+              >
+                <path
+                  stroke-linecap="round"
+                  stroke-linejoin="round"
+                  d="M12.75 15l3-3m0 0l-3-3m3 3h-7.5M21 12a9 9 0 11-18 0 9 9 0 0118 0z"
+                />
+              </svg>
             </button>
           </div>
         </div>
