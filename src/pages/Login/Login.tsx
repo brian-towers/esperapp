@@ -48,9 +48,8 @@ const Login = () => {
                   type="email"
                   autoComplete="email"
                   disabled={authLoading}
-                  required
                   className="block w-full rounded-md border-0 py-1.5 px-2 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400  focus:ring-orange-600 sm:text-sm sm:leading-6"
-                  {...register('email')}
+                  {...register('email', { required: true, maxLength: 40 })}
                 />
               </div>
             </div>
@@ -67,9 +66,8 @@ const Login = () => {
                   type="password"
                   autoComplete="password"
                   disabled={authLoading}
-                  required
                   className="block w-full rounded-md border-0 py-1.5 px-2 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400  focus:ring-orange-600 sm:text-sm sm:leading-6"
-                  {...register('password')}
+                  {...register('password', { required: true, maxLength: 20 })}
                 />
               </div>
               <div className="flex text-sm mt-1 justify-end">
