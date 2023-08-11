@@ -49,15 +49,15 @@ export default function InitialConfig() {
     <>
       <Stepper steps={steps} />
       <div className="flex w-full justify-center ">
-        <div className="flex min-h-full w-1/3 flex-col justify-center px-6 py-12 lg:px-8">
+        <div className="flex min-h-full w-1/3 flex-col justify-center px-6 py-12 lg:px-8 space-y-12">
           <StepOne />
-          <div className="flex justify-between space-x-4">
-            <button
+          <div className="flex justify-center">
+            {/* <button
               type="submit"
               className="flex max-w-sm text-orange-600 border border-orange-600 rounded-md justify-center font-semibold px-3 py-1.5 text-sm leading-6 "
             >
               {'Atras'}
-            </button>
+            </button> */}
             <button
               type="submit"
               className="inline-flex items-center max-w-sm text-white bg-orange-600 hover:bg-orange-500 rounded-md font-semibold px-3 py-1.5 text-sm leading-6"
