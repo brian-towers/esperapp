@@ -1,6 +1,7 @@
 import Spinner from '@components/Spinner';
 import { useAuthentication } from '@hooks/index';
 import { useForm } from 'react-hook-form';
+import { useNavigate } from 'react-router-dom';
 
 interface Exceptions {
   [key: string]: string; // Use an index signature to allow any string key
@@ -11,6 +12,7 @@ const exceptions: Exceptions = {
 };
 
 const Login = () => {
+  const navigate = useNavigate();
   const {
     register,
     handleSubmit,
@@ -22,6 +24,10 @@ const Login = () => {
   const submitForm = (data: any) => {
     console.log(data);
     authLogin(data.email, data.password);
+  };
+
+  const handleNavigation = (route: string) => {
+    navigate(route);
   };
 
   return (
@@ -71,9 +77,12 @@ const Login = () => {
                 />
               </div>
               <div className="flex text-sm mt-1 justify-end">
-                <a href="#" className="font-semibold text-orange-600 hover:text-orange-500 ">
+                <p
+                  onClick={() => handleNavigation('/forgot-password')}
+                  className="leading-6 cursor-pointer font-semibold text-orange-600 hover:text-orange-500"
+                >
                   ¿Olvidó su contraseña?
-                </a>
+                </p>
               </div>
             </div>
 
@@ -115,11 +124,9 @@ const Login = () => {
             </button>
           </div>
           <div className="flex mt-10 justify-center items-center text-sm text-gray-500">
-            <p>
-              ¿No tiene una cuenta?
-              <a href="/register" className="font-semibold leading-6 text-orange-600 hover:text-orange-500">
-                {' Crear cuenta'}
-              </a>
+            <p onClick={() => handleNavigation('/register')} className="leading-6 cursor-pointer">
+              <span className="font-normal text-gray-700">{'¿No tiene una cuenta?'}</span>
+              <span className="font-semibold text-orange-600 hover:text-orange-500">{' Registrase'}</span>
             </p>
           </div>
         </div>

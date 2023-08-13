@@ -1,16 +1,5 @@
 import { useState } from 'react';
 import Stepper from '@components/Stepper';
-import { XCircleIcon } from '@heroicons/react/outline';
-
-const stepss = ['Nombre del establecimiento', 'Mesas disponibles', 'Estados de las mesas', 'Miembros del equipo'];
-const tableStatusOptions = ['Disponible', 'Ocupada', 'Reservada', 'Estado 1', 'Estado 2', 'Estado 3'];
-
-const steps = [
-  { id: '01', name: 'Nombre del establecimiento', href: '#', status: 'complete' },
-  { id: '02', name: 'Mesas disponibles', href: '#', status: 'current' },
-  { id: '03', name: 'Estados de las mesas', href: '#', status: 'upcoming' },
-  { id: '04', name: 'Miembros del equipo', href: '#', status: 'upcoming' }
-];
 
 interface Collaborator {
   email: string;
@@ -27,8 +16,7 @@ export default function InitialConfig() {
   const [steps, setSteps] = useState([
     { id: '01', name: 'Nombre del establecimiento', href: '#', status: 'complete' },
     { id: '02', name: 'Mesas disponibles', href: '#', status: 'upcoming' },
-    { id: '03', name: 'Estados de las mesas', href: '#', status: 'upcoming' },
-    { id: '04', name: 'Miembros del equipo', href: '#', status: 'upcoming' }
+    { id: '03', name: 'Miembros del equipo', href: '#', status: 'upcoming' }
   ]);
   const [currentStep, setCurrentStep] = useState(steps[0]);
   const [business, setBusiness] = useState<Business>({
@@ -78,13 +66,6 @@ export default function InitialConfig() {
 
   const handleSubmit = () => {};
 
-  const handleTableStatus = (status: string) => {
-    setBusiness((prevBusiness: Business) => ({
-      ...prevBusiness,
-      tableStatusOptions: [...prevBusiness.tableStatusOptions, status]
-    }));
-  };
-
   return (
     <>
       <Stepper steps={steps} />
@@ -94,8 +75,7 @@ export default function InitialConfig() {
             <div className="flex-col">
               {currentStep.id === '01' && <StepOne />}
               {currentStep.id === '02' && <StepTwo />}
-              {currentStep.id === '03' && <StepThree handleTableStatus={handleTableStatus} />}
-              {currentStep.id === '04' && <StepFour />}
+              {currentStep.id === '03' && <StepThree />}
             </div>
           </div>
           <div className="flex justify-center space-x-6">
@@ -108,7 +88,7 @@ export default function InitialConfig() {
                 {'Atras'}
               </button>
             )}
-            {currentStep.id !== '04' && (
+            {currentStep.id !== '03' && (
               <button
                 onClick={handleNext}
                 className="inline-flex items-center justify-between max-w-sm text-white bg-orange-600 hover:bg-orange-500 rounded-md font-semibold px-3 py-1.5 text-sm leading-6"
@@ -131,7 +111,7 @@ export default function InitialConfig() {
                 </svg>
               </button>
             )}
-            {currentStep.id == '04' && (
+            {currentStep.id == '03' && (
               <button
                 onClick={handleSubmit}
                 className="inline-flex items-center justify-between max-w-sm text-white bg-orange-600 hover:bg-orange-500 rounded-md font-semibold px-3 py-1.5 text-sm leading-6"
@@ -201,33 +181,7 @@ const StepTwo = () => {
   );
 };
 
-const StepThree = ({ handleTableStatus }: { handleTableStatus: (status: string) => void }) => {
-  return (
-    <>
-      <div className="flex justify-center mb-8">
-        <img className="w-auto h-44" src="status3.svg" alt="" />
-      </div>
-      <p className="block text-xl leading-6 text-gray-900 mb-10">Seleccione los estados posibles de las mesas</p>
-      <div className="flex justify-center">
-        <div className="grid grid-cols-3 gap-4">
-          {tableStatusOptions.map((status) => {
-            return (
-              <button
-                onClick={() => handleTableStatus(status)}
-                className="flex w-full text-white bg-orange-600 hover:bg-orange-500 rounded-md justify-center font-semibold px-3 py-1.5 text-sm leading-6 shadow-md"
-                key={status} // Add a unique key for the button
-              >
-                {status}
-              </button>
-            );
-          })}
-        </div>
-      </div>
-    </>
-  );
-};
-
-const StepFour = () => {
+const StepThree = () => {
   return (
     <>
       <div className="flex justify-center mb-8">

@@ -6,8 +6,9 @@ interface authentication {
   login(email: string, password: string): Promise<string>;
   register(userData: { email: string; password: string }): Promise<string>;
   logout(): Promise<any>;
-  resendConfirmationCode(email: string): Promise<any>;
   confirmRegistration(email: string, code: string): Promise<any>;
+  resetPassword(email: string): Promise<any>;
+  confirmPassword(email: string, code: string, password: string): Promise<any>;
 }
 
 let auth: authentication;

@@ -48,20 +48,52 @@ class Cognito {
     });
   }
 
-  // RESEND CONFIRMATION
-  async resendConfirmationCode(email: string) {
+  // RESET PASSWORD
+  async resetPassword(email: string) {
     const userData = {
       Username: email,
       Pool: this.userPool
     };
-
     const cognitoUser = new CognitoUser(userData);
-    cognitoUser.resendConfirmationCode(function (err, result) {
-      if (err) {
+    cognitoUser.forgotPassword({
+      onSuccess: function (data) {
+        // successfully initiated reset password request
+        console.log('CodeDeliveryData from forgotPassword: ' + data);
+      },
+      onFailure: function (err) {
         alert(err.message || JSON.stringify(err));
-        return;
       }
-      console.log('call result: ' + result);
+      //Optional automatic callback
+      // inputVerificationCode: function (data) {
+      //   console.log('Code sent to: ' + data);
+      //   var code = document.getElementById('code').value;
+      //   var newPassword = document.getElementById('new_password').value;
+      //   cognitoUser.confirmPassword(verificationCode, newPassword, {
+      //     onSuccess() {
+      //       console.log('Password confirmed!');
+      //     },
+      //     onFailure(err) {
+      //       console.log('Password not confirmed!');
+      //     }
+      //   });
+      // }
+    });
+  }
+
+  // CONFIRM PASSWORD
+  async confirmPassword(email: string, code: string, password: string) {
+    const userData = {
+      Username: email,
+      Pool: this.userPool
+    };
+    const cognitoUser = new CognitoUser(userData);
+    cognitoUser.confirmPassword(code, password, {
+      onSuccess() {
+        console.log('Password confirmed!');
+      },
+      onFailure(err) {
+        console.log('Password not confirmed!');
+      }
     });
   }
 

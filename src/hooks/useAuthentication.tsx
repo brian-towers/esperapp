@@ -49,13 +49,44 @@ const useAuthentication = () => {
     try {
       setAuthLoading(true);
       const user = await auth.register(userData);
-      if (!!user) navigate('/confirm-code?email=' + userData.email);
+      if (user) navigate('/confirm-code?email=' + userData.email);
     } catch (error: any) {
       const err = JSON.parse(error);
       setAuthError(err.name);
       setAuthLoading(false);
     }
   };
+
+  const resetPassword = async (email: string) => {
+    try {
+      setAuthLoading(true);
+      await auth.resetPassword(email);
+    } catch (error) {
+      setAuthError('An error occurred while resetting password');
+      setAuthLoading(false);
+    }
+  };
+
+  const confirmPassword = async (email: string, code: string, password: string) => {
+    try {
+      setAuthLoading(true);
+      await auth.confirmPassword(email, code, password);
+    } catch (error) {
+      setAuthError('An error occurred while confirming password');
+      setAuthLoading(false);
+    }
+  };
+
+  // const resendConfirmationCode = async (email: string) => {
+  //   try {
+  //     setAuthLoading(true);
+  //     await auth.resendConfirmationCode(email);
+  //     setAuthLoading(false);
+  //   } catch (error) {
+  //     setAuthError('An error occurred while registering the user');
+  //     setAuthLoading(false);
+  //   }
+  // };
 
   const confirmRegistration = async (email: string, code: string) => {
     try {
@@ -69,7 +100,17 @@ const useAuthentication = () => {
     }
   };
 
-  return { authLoading, authError, authLogin, authLogout, authRegister, confirmRegistration };
+  return {
+    authLoading,
+    authError,
+    authLogin,
+    authLogout,
+    authRegister,
+    confirmRegistration,
+    // resendConfirmationCode,
+    resetPassword,
+    confirmPassword
+  };
 };
 
 export default useAuthentication;

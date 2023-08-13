@@ -1,13 +1,18 @@
 import Spinner from '@components/Spinner';
 import useAuthentication from '@hooks/useAuthentication';
 import { useForm } from 'react-hook-form';
+import { useNavigate } from 'react-router-dom';
 
 const Register = () => {
+  const navigate = useNavigate();
   const { register, handleSubmit } = useForm();
   const { authLoading, authError, authRegister } = useAuthentication();
 
   const submitForm = (data: any) => authRegister(data);
 
+  const handleNavigation = (route: string) => {
+    navigate(route);
+  };
   // if (error) {
   //   return <div>Error</div>;
   // }
@@ -17,7 +22,9 @@ const Register = () => {
       <div className="flex min-h-full flex-col justify-center px-6 py-12 lg:px-8">
         <div className="sm:mx-auto sm:w-full sm:max-w-sm">
           <img className="logo mx-auto h-10 w-auto" src="logo.png" alt="EsperaApp" />
-          <h2 className="mt-4 text-center text-2xl font-bold leading-9 tracking-tight text-gray-900">Crear Cuenta</h2>
+          <h2 className="mt-4 text-center text-2xl font-bold leading-9 tracking-tight text-gray-900 font-quicksand">
+            Crear Cuenta
+          </h2>
         </div>
 
         <div className="mt-10 sm:mx-auto sm:w-full sm:max-w-sm">
@@ -96,13 +103,12 @@ const Register = () => {
             </div>
           </form>
 
-          <p className="mt-10 text-center text-sm text-gray-500">
-            ¿Ya tiene una cuenta?
-            <a href="/login" className="font-semibold leading-6 text-orange-600 hover:text-orange-500">
-              {' '}
-              Ingresar
-            </a>
-          </p>
+          <div className="flex mt-10 justify-center items-center text-sm text-gray-500">
+            <p onClick={() => handleNavigation('/login')} className="leading-6 cursor-pointer">
+              <span className="font-normal text-gray-700">{'¿Ya tiene una cuenta?'}</span>
+              <span className="font-semibold text-orange-600 hover:text-orange-500">{' Ingresar'}</span>
+            </p>
+          </div>
         </div>
       </div>
     </>

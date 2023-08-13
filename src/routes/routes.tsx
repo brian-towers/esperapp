@@ -3,12 +3,14 @@ import { Base, Dashboard } from '@layouts/index';
 import { ConfirmCode, Home, InitialConfig, Login, Register } from '@pages/index';
 import PrivateRoute from '@helpers/privateRoute';
 import useAppSelector from '@hooks/useAppSelector';
+import ForgotPassword from '@pages/ForgotPassword/ForgotPassword';
 
 const HOME_ROUTE = '/';
 const LOGIN_ROUTE = '/login';
 const REGISTER_ROUTE = '/register';
 const CONFIRM_CODE = '/confirm-code';
 const CREATE_RESTAURANT = '/create-restaurant';
+const FORGOT_PASSWORD = '/forgot-password';
 
 const AppRoutes = (): JSX.Element => {
   const isAuthenticated = useAppSelector((state) => state.user.authToken);
@@ -48,6 +50,15 @@ const AppRoutes = (): JSX.Element => {
           element={
             <Base>
               <Register />
+            </Base>
+          }
+        />
+        {/* Forgot Password */}
+        <Route
+          path={FORGOT_PASSWORD}
+          element={
+            <Base>
+              <ForgotPassword />
             </Base>
           }
         />
