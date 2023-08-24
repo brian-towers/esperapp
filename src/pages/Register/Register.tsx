@@ -1,12 +1,19 @@
 import Spinner from '@components/Spinner';
 import useAuthentication from '@hooks/useAuthentication';
+import { useEffect } from 'react';
 import { useForm } from 'react-hook-form';
-import { useNavigate } from 'react-router-dom';
+import { useNavigate, useSearchParams } from 'react-router-dom';
 
 const Register = () => {
+  const [searchParams, _setSearchParams] = useSearchParams();
   const navigate = useNavigate();
   const { register, handleSubmit } = useForm();
-  const { authLoading, authError, authRegister } = useAuthentication();
+  const { authLoading, authError, authRegister, confirmRegistration } = useAuthentication();
+
+  useEffect(() => {
+    const code = searchParams.get('confirmation_code');
+    if (code) confirmRegistration('brianfiuba@gmail.com', code);
+  }, []);
 
   const submitForm = (data: any) => authRegister(data);
 
