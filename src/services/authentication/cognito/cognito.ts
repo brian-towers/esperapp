@@ -81,19 +81,22 @@ class Cognito {
   }
 
   // CONFIRM PASSWORD
-  async confirmPassword(email: string, code: string, password: string) {
+  confirmPassword(email: string, code: string, password: string) {
     const userData = {
       Username: email,
       Pool: this.userPool
     };
     const cognitoUser = new CognitoUser(userData);
-    cognitoUser.confirmPassword(code, password, {
-      onSuccess() {
-        console.log('Password confirmed!');
-      },
-      onFailure(err) {
-        console.log('Password not confirmed!');
-      }
+
+    return new Promise((resolve, reject) => {
+      cognitoUser.confirmPassword(code, password, {
+        onSuccess() {
+          resolve(true);
+        },
+        onFailure(err) {
+          reject(err);
+        }
+      });
     });
   }
 

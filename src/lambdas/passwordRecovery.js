@@ -1,5 +1,6 @@
 const handler = async (event) => {
-  const CustomMessage_ForgotPassword = `<style>
+  const CustomMessage_ForgotPassword = `
+        <style>
         p {
         display: block;
         margin-block-start: 1em;
@@ -17,7 +18,8 @@ const handler = async (event) => {
         <p>Your website team</p>
         </div>`;
 
-  const CustomMessage_SignUp = `<style>
+  const CustomMessage_SignUp = `
+        <style>
         p {
         display: block;
         margin-block-start: 1em;
@@ -29,7 +31,7 @@ const handler = async (event) => {
 
         <div id=":x9" class="a3s aXjCH " role="gridcell" tabindex="-1"><p>Hello,</p>
         <p>Follow this link to confirm your account. </p>
-        <p><a href="http://localhost:5173/register?confirmation_code=${event.request.codeParameter}"> Confirm </a></p>
+        <p><a href="http://localhost:5173/login?confirmation_code=${event.request.codeParameter}&user_name=${event.userName}"> Confirm </a></p>
         <p>Thanks,</p>
         <p>Your website team</p>
         </div>`;

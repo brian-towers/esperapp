@@ -1,7 +1,8 @@
 import Spinner from '@components/Spinner';
 import { useAuthentication } from '@hooks/index';
+import { useEffect, useState } from 'react';
 import { useForm } from 'react-hook-form';
-import { useNavigate } from 'react-router-dom';
+import { useNavigate, useSearchParams } from 'react-router-dom';
 
 interface Exceptions {
   [key: string]: string; // Use an index signature to allow any string key
@@ -12,6 +13,9 @@ const exceptions: Exceptions = {
 };
 
 const Login = () => {
+  const { authLoading, authError, authLogin, confirmRegistration } = useAuthentication();
+  const [searchParams, _setSearchParams] = useSearchParams();
+  const [confirmationCode, setConfirmationCode] = useState(false);
   const navigate = useNavigate();
   const {
     register,
@@ -19,7 +23,15 @@ const Login = () => {
     watch,
     formState: { errors }
   } = useForm();
-  const { authLoading, authError, authLogin } = useAuthentication();
+
+  useEffect(() => {
+    const code = searchParams.get('confirmation_code');
+    const user_name = searchParams.get('user_name');
+    if (code && user_name) {
+      confirmRegistration(user_name, code);
+      setConfirmationCode(true);
+    }
+  }, []);
 
   const submitForm = (data: any) => {
     console.log(data);
@@ -35,9 +47,20 @@ const Login = () => {
       <div className="flex min-h-full flex-col justify-center px-6 py-12 lg:px-8">
         <div className="sm:mx-auto sm:w-full sm:max-w-sm">
           <img className="logo mx-auto h-10 w-auto" src="logo.png" alt="EsperaApp" />
-          <h2 className="mt-4 text-center text-2xl font-quicksand font-bold leading-9 tracking-tight text-gray-900">
-            Ingrese a su cuenta
-          </h2>
+          {confirmationCode ? (
+            <div className="flex flex-col">
+              <h2 className="mt-2 text-center text-2xl font-quicksand font-bold leading-9 tracking-tight text-gray-900">
+                ¡Ya confirmaste tu cuenta!
+              </h2>
+              <p className="mt-2 text-center text-xl font-quicksand font-bold leading-9 tracking-tight text-gray-900">
+                Ingrese a su cuenta
+              </p>
+            </div>
+          ) : (
+            <h2 className="mt-4 text-center text-2xl font-quicksand font-bold leading-9 tracking-tight text-gray-900">
+              Ingrese a su cuenta
+            </h2>
+          )}
         </div>
         <div className="mt-10 sm:mx-auto sm:w-full sm:max-w-sm">
           <div className="flex justify-center w-full text-red-600 font-medium">

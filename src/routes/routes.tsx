@@ -1,9 +1,10 @@
 import { Route, Routes } from 'react-router-dom';
 import { Base, Dashboard } from '@layouts/index';
-import { ConfirmCode, Home, InitialConfig, Login, Register } from '@pages/index';
+import { ConfirmAccount, Home, InitialConfig, Login, Register } from '@pages/index';
 import PrivateRoute from '@helpers/privateRoute';
 import useAppSelector from '@hooks/useAppSelector';
 import ForgotPassword from '@pages/ForgotPassword/ForgotPassword';
+import ResetPassword from '@pages/ResetPassword/ResetPassword';
 
 const HOME_ROUTE = '/';
 const LOGIN_ROUTE = '/login';
@@ -11,6 +12,7 @@ const REGISTER_ROUTE = '/register';
 const CONFIRM_CODE = '/confirm-code';
 const CREATE_RESTAURANT = '/create-restaurant';
 const FORGOT_PASSWORD = '/forgot-password';
+const RESET_PASSWORD = '/reset-password';
 
 const AppRoutes = (): JSX.Element => {
   const isAuthenticated = useAppSelector((state) => state.user.authToken);
@@ -62,12 +64,21 @@ const AppRoutes = (): JSX.Element => {
             </Base>
           }
         />
-        {/* ConfirmCode Route */}
+        {/* Forgot Password */}
+        <Route
+          path={RESET_PASSWORD}
+          element={
+            <Base>
+              <ResetPassword />
+            </Base>
+          }
+        />
+        {/* ConfirmAccount Route */}
         <Route
           path={CONFIRM_CODE}
           element={
             <Base>
-              <ConfirmCode />
+              <ConfirmAccount />
             </Base>
           }
         />
